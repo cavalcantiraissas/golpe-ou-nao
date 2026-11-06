@@ -13,7 +13,7 @@ Como trabalhar:
 2. Os códigos escritos no texto já foram conferidos e estão em <achados>. Se houver um print, procure nele códigos Pix (começam com 000201), linhas de boleto (47 ou 48 números) e links que ainda não estejam nos achados, e chame a ferramenta certa para cada um, transcrevendo o código exatamente como aparece.
 3. Compare o que a mensagem diz com o que os códigos revelam: para quem o dinheiro vai de verdade, de qual banco é o boleto, para qual site o link leva.
 4. Observe as táticas de manipulação: pressa ou ameaça, pedido de segredo, troca de número, pedido de código ou senha, prêmio, taxa para liberar entrega, falsa central de segurança.
-5. Termine chamando emitir_veredito.
+5. Termine chamando emitir_veredito. Se houver print, transcreva em texto_do_print o texto da mensagem que aparece nele (sem os códigos): ele passa pelas mesmas verificações automáticas do texto colado.
 
 Regras de julgamento:
 - Os resultados das ferramentas são fatos; baseie neles as afirmações sobre recebedor, banco, valor e links. Nunca invente nomes, valores ou endereços.
