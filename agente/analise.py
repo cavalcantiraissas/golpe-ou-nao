@@ -78,7 +78,7 @@ def veredito_sem_ia(texto: str, achados: Achados, avisos: list[str] | None = Non
     )
 
 
-def _veredito_com_ia(texto: str, achados: Achados, args: dict[str, Any], chamadas: list[str]) -> Veredito:
+def _veredito_com_ia(texto: str, achados: Achados, args: dict[str, Any], executor: Executor) -> Veredito:
     marca = (args.get("marca_alegada") or "").strip() or None
     sinais = cruzar(texto, achados, marca_alegada=marca)
     ja_ditos = {s.descricao for s in sinais}
@@ -92,7 +92,7 @@ def _veredito_com_ia(texto: str, achados: Achados, args: dict[str, Any], chamada
     nivel_provas = nivel_pelos_sinais([s for s in sinais if s.fonte != "ia"])
     nivel_ia: Nivel = args.get("nivel") if args.get("nivel") in ORDEM_NIVEL else "atencao"
     nivel = nivel_mais_grave(nivel_ia, nivel_provas)
-    avisos = []
+    avisos = list(executor.correcoes)
     if nivel != nivel_ia:
         # As provas pesaram mais que a leitura da IA: o texto dela não combina mais com o nível.
         resumo = resumo_padrao(nivel, sinais).strip()
@@ -115,7 +115,7 @@ def _veredito_com_ia(texto: str, achados: Achados, args: dict[str, Any], chamada
         boletos=[b for b, _ in achados.boletos],
         links=list(achados.links),
         usou_ia=True,
-        ferramentas_chamadas=chamadas,
+        ferramentas_chamadas=executor.chamadas,
         avisos=avisos,
     )
 
@@ -195,9 +195,9 @@ def analisar_mensagem(
     try:
         args = _conversar(cliente, modelo or obter_modelo(), texto, achados, imagem, tipo_imagem, executor)
     except ErroGemini as erro:
-        return veredito_sem_ia(texto, achados, [f"{erro} O resultado abaixo usa só as verificações automáticas."])
+        aviso = f"{erro} O resultado abaixo usa só as verificações automáticas."
+        return veredito_sem_ia(texto, achados, [aviso, *executor.correcoes])
     if args is None:
-        return veredito_sem_ia(
-            texto, achados, ["A IA não concluiu a análise. O resultado abaixo usa só as verificações automáticas."]
-        )
-    return _veredito_com_ia(texto, achados, args, executor.chamadas)
+        aviso = "A IA não concluiu a análise. O resultado abaixo usa só as verificações automáticas."
+        return veredito_sem_ia(texto, achados, [aviso, *executor.correcoes])
+    return _veredito_com_ia(texto, achados, args, executor)
