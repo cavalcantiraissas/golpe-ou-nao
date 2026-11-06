@@ -97,7 +97,7 @@ TATICAS: list[tuple[str, str, str]] = [
     ),
     (
         r"\burgente\b|\bimediatamente\b|\bainda hoje\b|\bultimo dia\b|\bem ate \d+ ?(h|horas)\b"
-        r"|\bnas proximas \d+ ?(h|horas)\b|\bevite (o |a )?(corte|bloqueio|cancelamento|suspensao)\b"
+        r"|\bnas proximas \d+ ?(h|horas)\b|\bevit(e|ar) (o |a )?(corte|bloqueio|cancelamento|suspensao)\b"
         r"|\bsera (bloquead|cancelad|suspens|cortad)\w*",
         "media",
         "Cria pressa ou ameaça (corte, bloqueio, prazo de horas) para você não ter tempo de pensar.",
