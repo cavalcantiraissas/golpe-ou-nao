@@ -117,6 +117,19 @@ def test_ia_le_o_pix_do_print_e_a_prova_aparece():
     assert retorno.response["resultado"]["nome_recebedor"] == "CARLOS PEREIRA"
 
 
+def test_pix_mal_lido_do_print_e_corrigido_e_avisado():
+    codigo = montar_pix(nome="WELLINGTON S COSTA", cidade="SAO PAULO")
+    cliente = ClienteFalso(
+        chamar(("decodificar_pix", {"codigo": codigo.replace("SAO PAULO", "SAO PAUL0")})),
+        veredito("provavel_golpe", marca="Enel"),
+    )
+    v = analisar_mensagem(imagem=PRINT, cliente=cliente)
+    assert v.pix[0].valido
+    assert v.pix[0].cidade == "SAO PAULO"
+    assert not any("Não deu para ler" in s.descricao for s in v.sinais)
+    assert any("corrigido" in a for a in v.avisos)
+
+
 def test_configuracao_enviada_ao_modelo():
     cliente = ClienteFalso(veredito("sem_sinais"))
     analisar_mensagem("Chego às 19h", cliente=cliente, modelo="modelo-teste")
