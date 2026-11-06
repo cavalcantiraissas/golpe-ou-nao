@@ -43,10 +43,12 @@ def chamar(*funcoes: tuple[str, dict]) -> types.GenerateContentResponse:
     return types.GenerateContentResponse(candidates=[types.Candidate(content=types.Content(role="model", parts=partes))])
 
 
-def veredito(nivel="atencao", resumo="Resumo da IA.", sinais=None, o_que_fazer=None, marca=None):
+def veredito(nivel="atencao", resumo="Resumo da IA.", sinais=None, o_que_fazer=None, marca=None, texto_do_print=None):
     args = {"nivel": nivel, "resumo": resumo, "sinais": sinais or [], "o_que_fazer": o_que_fazer or ["Ação da IA."]}
     if marca:
         args["marca_alegada"] = marca
+    if texto_do_print:
+        args["texto_do_print"] = texto_do_print
     return chamar(("emitir_veredito", args))
 
 
@@ -128,6 +130,35 @@ def test_pix_mal_lido_do_print_e_corrigido_e_avisado():
     assert v.pix[0].cidade == "SAO PAULO"
     assert not any("Não deu para ler" in s.descricao for s in v.sinais)
     assert any("corrigido" in a for a in v.avisos)
+
+
+def test_regras_de_texto_valem_para_o_texto_do_print():
+    transcricao = (
+        "Oi mãe, esse é meu número novo. Consegue fazer esse Pix pra mim? "
+        "Não comenta com o pai que ele vai brigar"
+    )
+    cliente = ClienteFalso(veredito("atencao", texto_do_print=transcricao))
+    v = analisar_mensagem(imagem=PRINT, cliente=cliente)
+    assert v.texto_do_print == transcricao
+    regras = [s.descricao for s in v.sinais if s.fonte == "regra"]
+    assert any("trocou de número" in d for d in regras)
+    assert any("segredo" in d for d in regras)
+    assert v.nivel == "provavel_golpe"  # troca de número pedindo Pix é prova alta
+
+
+def test_valor_escrito_no_print_e_comparado_com_o_pix():
+    codigo = montar_pix(chave="11222333000181", nome="ENEL DISTRIBUICAO", valor="2473.00")
+    cliente = ClienteFalso(
+        chamar(("decodificar_pix", {"codigo": codigo})),
+        veredito("atencao", marca="Enel", texto_do_print="ENEL INFORMA: fatura de R$ 247,30 em atraso."),
+    )
+    v = analisar_mensagem(imagem=PRINT, cliente=cliente)
+    assert any("R$ 2.473,00" in s.descricao and "R$ 247,30" in s.descricao for s in v.provas)
+
+
+def test_sem_print_o_texto_do_print_fica_vazio():
+    v = analisar_mensagem("Chego às 19h", cliente=ClienteFalso(veredito("sem_sinais")))
+    assert v.texto_do_print is None
 
 
 def test_configuracao_enviada_ao_modelo():
