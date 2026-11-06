@@ -80,7 +80,10 @@ def veredito_sem_ia(texto: str, achados: Achados, avisos: list[str] | None = Non
 
 def _veredito_com_ia(texto: str, achados: Achados, args: dict[str, Any], executor: Executor) -> Veredito:
     marca = (args.get("marca_alegada") or "").strip() or None
-    sinais = cruzar(texto, achados, marca_alegada=marca)
+    # As regras de texto valem também para o que está escrito no print.
+    texto_do_print = str(args.get("texto_do_print") or "").strip() or None
+    texto_total = "\n".join(t for t in (texto, texto_do_print) if t)
+    sinais = cruzar(texto_total, achados, marca_alegada=marca)
     ja_ditos = {s.descricao for s in sinais}
     for item in args.get("sinais") or []:
         descricao = str(item.get("descricao", "")).strip()
@@ -103,7 +106,7 @@ def _veredito_com_ia(texto: str, achados: Achados, args: dict[str, Any], executo
         o_que_fazer = [str(x) for x in args.get("o_que_fazer") or []] or ORIENTACOES[nivel]
 
     if not marca:
-        mencionadas = marcas_mencionadas(texto)
+        mencionadas = marcas_mencionadas(texto_total)
         marca = mencionadas[0] if mencionadas else None
     return Veredito(
         nivel=nivel,
@@ -111,6 +114,7 @@ def _veredito_com_ia(texto: str, achados: Achados, args: dict[str, Any], executo
         sinais=sinais,
         o_que_fazer=o_que_fazer,
         marca_alegada=marca,
+        texto_do_print=texto_do_print,
         pix=[p for p, _ in achados.pix],
         boletos=[b for b, _ in achados.boletos],
         links=list(achados.links),
