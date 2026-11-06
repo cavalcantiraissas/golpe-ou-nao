@@ -23,7 +23,15 @@ import httpx
 from google import genai
 from google.genai import types
 
-from agente.cruzamento import Achados, cruzar, levantar_achados, marcas_mencionadas, nivel_pelos_sinais
+from agente.cruzamento import (
+    Achados,
+    cruzar,
+    levantar_achados,
+    marcas_mencionadas,
+    nivel_pelos_sinais,
+    ordenar,
+    remover_repetidos,
+)
 from agente.ferramentas import DECLARACOES, Executor, achados_em_json
 from agente.gemini import ErroGemini, criar_cliente, gerar, obter_chave, obter_modelo
 from agente.modelos import ORDEM_NIVEL, Nivel, Sinal, Veredito, nivel_mais_grave
@@ -84,13 +92,13 @@ def _veredito_com_ia(texto: str, achados: Achados, args: dict[str, Any], executo
     texto_do_print = str(args.get("texto_do_print") or "").strip() or None
     texto_total = "\n".join(t for t in (texto, texto_do_print) if t)
     sinais = cruzar(texto_total, achados, marca_alegada=marca)
-    ja_ditos = {s.descricao for s in sinais}
+    sinais_ia = []
     for item in args.get("sinais") or []:
         descricao = str(item.get("descricao", "")).strip()
         gravidade = item.get("gravidade") if item.get("gravidade") in ("alta", "media", "baixa") else "media"
-        if descricao and descricao not in ja_ditos:
-            sinais.append(Sinal(descricao=descricao, gravidade=gravidade, fonte="ia"))
-            ja_ditos.add(descricao)
+        if descricao:
+            sinais_ia.append(Sinal(descricao=descricao, gravidade=gravidade, fonte="ia"))
+    sinais = ordenar(sinais + remover_repetidos(sinais_ia, sinais))
 
     nivel_provas = nivel_pelos_sinais([s for s in sinais if s.fonte != "ia"])
     nivel_ia: Nivel = args.get("nivel") if args.get("nivel") in ORDEM_NIVEL else "atencao"
