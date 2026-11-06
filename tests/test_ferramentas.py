@@ -89,3 +89,25 @@ def test_achados_em_json_e_serializavel():
     assert dados["pix"][0]["origem"] == "texto"
     assert len(dados["boletos"]) == 1
     assert dados["links"][0]["encurtador"] is True
+
+
+def test_pix_mal_lido_do_print_e_corrigido():
+    codigo = montar_pix(nome="WELLINGTON S COSTA", cidade="SAO PAULO")
+    executor = Executor("", Achados(), tem_imagem=True)
+    resposta = executor.executar("decodificar_pix", {"codigo": codigo.replace("SAO PAULO", "SAO PAUL0")})
+    assert resposta["valido"] is True
+    assert resposta["cidade"] == "SAO PAULO"
+    assert resposta["corrigido_pela_conferencia"] is True
+    assert executor.achados.pix[0][0].valido
+    assert executor.achados.pix[0][1] == "imagem"
+    assert len(executor.correcoes) == 1
+
+
+def test_pix_errado_no_texto_nao_e_corrigido():
+    # Colado como texto, o código é exatamente o que a pessoa recebeu: erro ali é adulteração.
+    lido = montar_pix(cidade="SAO PAULO").replace("SAO PAULO", "SAO PAUL0")
+    executor = Executor("Paga: " + lido, Achados(), tem_imagem=True)
+    resposta = executor.executar("decodificar_pix", {"codigo": lido})
+    assert resposta["valido"] is False
+    assert "corrigido_pela_conferencia" not in resposta
+    assert executor.correcoes == []
