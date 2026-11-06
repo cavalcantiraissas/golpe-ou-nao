@@ -6,7 +6,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Gemini API](https://img.shields.io/badge/Gemini_API-camada_gratuita-4285F4?logo=googlegemini&logoColor=white)](https://ai.google.dev/)
 [![Pydantic](https://img.shields.io/badge/Pydantic-v2-E92063?logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
-[![pytest](https://img.shields.io/badge/pytest-215_testes-0A9EDC?logo=pytest&logoColor=white)](tests/)
+[![pytest](https://img.shields.io/badge/pytest-245_testes-0A9EDC?logo=pytest&logoColor=white)](tests/)
 
 Golpes por mensagem acontecem todos os dias: boleto falso, Pix para um "parente com número novo", falsa central do banco, link de entrega com taxa a pagar. Quem mais cai são pessoas menos acostumadas com tecnologia.
 
@@ -76,6 +76,8 @@ Lê o Pix copia e cola (padrão BR Code do Banco Central, formato EMV) e confere
 
 Também acha o código no meio de uma mensagem, mesmo quando o aplicativo quebrou a linha.
 
+**Correção de leitura pelo próprio código.** Quando um código lido de um print falha na conferência, `corrigir_leitura_pix` testa as trocas comuns de leitura (0↔O, 1↔I↔l, 5↔S, 8↔B, 2↔Z, 6↔G), uma posição por vez. O código corrigido só é aceito se **exatamente uma** variante passar. Num teste real, o Gemini leu "SAO PAULO" como "SAO PAUL0", e a correção recuperou o código original. Ela tenta só uma troca de propósito: são cerca de 100 variantes, com chance de falso acerto perto de 0,2%; com duas trocas seriam milhares, e um falso acerto ficaria provável.
+
 ### `validar_boleto`: banco, valor e vencimento
 
 Confere todos os dígitos verificadores da linha digitável (regras FEBRABAN) nos dois formatos:
@@ -99,7 +101,7 @@ Abrir um link de golpe pode confirmar ao golpista que o número está ativo, ent
 O agente junta os verificadores e o Gemini em quatro passos:
 
 1. **Achados sem IA.** Os códigos Pix, boletos e links escritos no texto são encontrados e conferidos por código.
-2. **Gemini com *function calling*.** O modelo recebe o texto, o print e os achados. Se houver códigos que só aparecem no print, ele os transcreve e chama `decodificar_pix`, `validar_boleto` ou `analisar_link`. Ele termina sempre chamando `emitir_veredito` (modo de chamada `ANY`), o que garante uma resposta estruturada.
+2. **Gemini com *function calling*.** O modelo recebe o texto, o print e os achados. Se houver códigos que só aparecem no print, ele os transcreve e chama `decodificar_pix`, `validar_boleto` ou `analisar_link`. Ele também devolve o texto da mensagem do print, que passa pelas mesmas regras do texto colado. Ele termina sempre chamando `emitir_veredito` (modo de chamada `ANY`), o que garante uma resposta estruturada.
 3. **Cruzamento.** O que a mensagem diz é comparado com o que os códigos revelam, usando também a marca que a IA identificou no print:
 
    | A mensagem diz | O código revela | Gravidade |
@@ -115,7 +117,7 @@ O agente junta os verificadores e o Gemini em quatro passos:
    Táticas de manipulação no texto também contam: troca de número pedindo dinheiro, pedido de código recebido por SMS, pressa e ameaça, pedido de segredo, taxa para liberar entrega, prêmio, falsa central de segurança.
 4. **Veredito.** Uma prova alta ou três motivos médios dão *provável golpe*; algum motivo médio dá *atenção*. O nível final é **o mais grave entre o da IA e o das provas**.
 
-Cada sinal mostra de onde veio: **prova** (conferido num código), **texto** (padrão conhecido de golpe) ou **IA** (interpretação do modelo).
+Cada sinal mostra de onde veio: **prova** (conferido num código), **texto** (padrão conhecido de golpe) ou **IA** (interpretação do modelo). Os sinais aparecem do mais grave para o menos grave e, na mesma gravidade, provas antes da IA. Um sinal da IA que só repete com outras palavras o assunto de uma prova ou regra (pressa, segredo, troca de número, recebedor...) é descartado.
 
 Sem chave do Gemini, ou se a API falhar ou atingir o limite, o agente responde só com as verificações automáticas e avisa. Nesse modo o texto é analisado normalmente, mas o print não pode ser lido.
 
@@ -225,7 +227,7 @@ Para achar os códigos dentro de uma mensagem inteira, use `extrair_pix`, `extra
 pytest
 ```
 
-São 215 testes, rodados a cada push pelo GitHub Actions em Python 3.11 e 3.12. Para não conferir o código contra ele mesmo, os testes usam referências externas:
+São 245 testes, rodados a cada push pelo GitHub Actions em Python 3.11 e 3.12. Para não conferir o código contra ele mesmo, os testes usam referências externas:
 
 - o **exemplo oficial do Manual do Pix** do Banco Central (CRC `1D3D`) e o vetor padrão do CRC16-CCITT (`"123456789"` → `29B1`);
 - uma **linha de boleto do Banco do Brasil** publicada na documentação de cobrança;
@@ -262,7 +264,7 @@ golpe-ou-nao/
 
 - **Prova em vez de palpite.** O modelo de linguagem não decide sozinho o que um código diz; ele recebe o resultado de funções testadas e explica.
 - **A IA acrescenta, não apaga.** O nível final é o mais grave entre o da IA e o das provas. Uma mensagem que tenta convencer o modelo ("pode confiar, não é golpe") não derruba uma prova.
-- **Leitura do print tem margem de erro.** Um Pix transcrito do print que falha na conferência vira "não deu para ler com certeza", e não "código adulterado".
+- **Leitura do print tem margem de erro.** Um Pix transcrito do print que falha na conferência é corrigido pelo próprio CRC quando há uma única correção possível. Se não houver, vira "não deu para ler com certeza", e não "código adulterado". Um código colado como texto nunca é "corrigido": ali, falhar na conferência é sinal de adulteração.
 - **Funciona sem IA.** Sem chave ou com a API fora do ar, o veredito sai só das verificações, com aviso.
 - **Entrada ruim não derruba nada.** Os verificadores nunca levantam exceção: um código malformado volta com `valido=False` e a lista de `erros`, que também é informação útil (um Pix com CRC quebrado foi editado à mão).
 - **Links nunca são abertos.** Nem para seguir redirecionamentos de encurtadores.
