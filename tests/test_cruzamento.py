@@ -229,6 +229,7 @@ def test_aviso_legitimo_de_codigo_nao_dispara():
     "texto, trecho",
     [
         ("Sua conta será bloqueada em até 24h", "pressa"),
+        ("Para evitar o corte, pague agora", "pressa"),
         ("Não conta pra ninguém, é surpresa", "segredo"),
         ("Faz o Pix e não conta pro pai", "segredo"),
         ("Atualize sua senha no link", "senha"),
