@@ -137,7 +137,7 @@ def _validar_bancario(linha: str, referencia: date | None) -> ResultadoBoleto:
         codigo_barras=codigo_barras,
         codigo_banco=banco,
         nome_banco=BANCOS.get(banco),
-        valor=Decimal(centavos) / 100 if centavos else None,
+        valor=Decimal(centavos).scaleb(-2) if centavos else None,
         vencimento=data_do_fator(int(linha[33:37]), referencia),
     )
 
@@ -181,7 +181,7 @@ def _validar_arrecadacao(linha: str) -> ResultadoBoleto:
         codigo_barras=codigo_barras,
         segmento=SEGMENTOS.get(segmento, f"Desconhecido ({segmento})"),
         codigo_empresa=empresa,
-        valor=Decimal(centavos) / 100 if centavos else None,
+        valor=Decimal(centavos).scaleb(-2) if centavos else None,
     )
 
 
