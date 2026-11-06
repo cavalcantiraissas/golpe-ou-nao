@@ -20,6 +20,7 @@ from google.genai import types
 
 from agente.cruzamento import Achados, Origem
 from verificadores import analisar_link, decodificar_pix, validar_boleto
+from verificadores.pix import corrigir_leitura_pix
 
 DECLARACOES = [
     types.FunctionDeclaration(
@@ -139,6 +140,7 @@ class Executor:
         self.chave_safe_browsing = chave_safe_browsing
         self.cliente_http = cliente_http
         self.chamadas: list[str] = []
+        self.correcoes: list[str] = []
         self._vistos: set[tuple[str, str]] = {("link", link.url) for link in achados.links}
 
     def _origem(self, no_texto: bool) -> Origem:
@@ -151,10 +153,23 @@ class Executor:
                 codigo = re.sub(r"\s*[\r\n]+\s*", "", str(args["codigo"])).strip()
                 self.chamadas.append("decodificar_pix")
                 resultado = decodificar_pix(codigo)
+                origem = self._origem(re.sub(r"\s+", "", codigo) in self.texto_corrido)
+                corrigido = None
+                if not resultado.valido and origem == "imagem":
+                    corrigido = corrigir_leitura_pix(codigo)
+                    if corrigido:
+                        resultado = decodificar_pix(corrigido)
+                        self.correcoes.append(
+                            "Um caractere do código Pix foi lido errado no print e corrigido pela "
+                            "conferência do próprio código."
+                        )
                 if ("pix", codigo) not in self._vistos and not self._ja_tem_pix(resultado):
                     self._vistos.add(("pix", codigo))
-                    no_texto = re.sub(r"\s+", "", codigo) in self.texto_corrido
-                    self.achados.pix.append((resultado, self._origem(no_texto)))
+                    self.achados.pix.append((resultado, origem))
+                if corrigido:
+                    return resultado.model_dump(mode="json", exclude_none=True) | {
+                        "corrigido_pela_conferencia": True
+                    }
             elif nome == "validar_boleto":
                 linha = str(args["linha_digitavel"])
                 self.chamadas.append("validar_boleto")
