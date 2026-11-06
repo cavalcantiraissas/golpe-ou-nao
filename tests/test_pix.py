@@ -2,7 +2,7 @@ from decimal import Decimal
 
 import pytest
 
-from verificadores.pix import classificar_chave, crc16_ccitt, decodificar_pix, extrair_pix
+from verificadores.pix import classificar_chave, corrigir_leitura_pix, crc16_ccitt, decodificar_pix, extrair_pix
 
 # Exemplo oficial do Manual de Padrões para Iniciação do Pix (Banco Central).
 EXEMPLO_BCB = (
@@ -188,6 +188,51 @@ def test_extrai_dois_codigos():
 
 def test_mensagem_sem_pix():
     assert extrair_pix("Sua encomenda está a caminho") == []
+
+
+# --- Correção de leitura de imagem ----------------------------------------
+
+
+def test_corrige_zero_lido_no_lugar_de_o():
+    # Erro real do Gemini ao ler um print: "SAO PAULO" virou "SAO PAUL0".
+    codigo = montar_pix(chave="pagamentos.rapidos77@gmail.com", nome="WELLINGTON S COSTA", cidade="SAO PAULO")
+    lido = codigo.replace("SAO PAULO", "SAO PAUL0")
+    assert not decodificar_pix(lido).valido
+    assert corrigir_leitura_pix(lido) == codigo
+
+
+@pytest.mark.parametrize(
+    "original, lido",
+    [
+        ("12345678909", "I2345678909"),  # 1 lido como I na chave
+        ("JOAO DA SILVA", "JOAO DA 5ILVA"),  # S lido como 5 no nome
+        ("BRASILIA", "8RASILIA"),  # B lido como 8 na cidade
+    ],
+)
+def test_corrige_trocas_comuns(original, lido):
+    codigo = montar_pix(chave="12345678909", nome="JOAO DA SILVA", cidade="BRASILIA")
+    assert corrigir_leitura_pix(codigo.replace(original, lido, 1)) == codigo
+
+
+def test_corrige_crc_mal_lido():
+    # O próprio CRC também pode ser mal lido: "1D3D" lido como "ID3D".
+    assert corrigir_leitura_pix(EXEMPLO_BCB[:-4] + "ID3D") == EXEMPLO_BCB
+
+
+def test_codigo_valido_volta_igual():
+    codigo = montar_pix()
+    assert corrigir_leitura_pix(codigo) == codigo
+
+
+def test_duas_trocas_nao_sao_corrigidas():
+    codigo = montar_pix(nome="JOAO DA SILVA", cidade="SAO PAULO")
+    lido = codigo.replace("SAO PAULO", "5AO PAUL0")
+    assert corrigir_leitura_pix(lido) is None
+
+
+def test_troca_que_nao_e_de_leitura_nao_e_corrigida():
+    codigo = montar_pix(nome="JOAO DA SILVA")
+    assert corrigir_leitura_pix(codigo.replace("JOAO", "JOAX")) is None
 
 
 # --- Tipo de chave ---------------------------------------------------------
