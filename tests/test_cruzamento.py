@@ -3,13 +3,17 @@ from decimal import Decimal
 import pytest
 
 from agente.cruzamento import (
+    TATICAS,
     Achados,
     cruzar,
     levantar_achados,
     marcas_mencionadas,
     nivel_pelos_sinais,
+    ordenar,
     reais,
+    remover_repetidos,
     sinais_de_texto,
+    temas,
     valores_mencionados,
 )
 from agente.modelos import Sinal
@@ -283,3 +287,69 @@ def test_sinais_ordenados_e_sem_repeticao():
         (x.gravidade for x in sinais), key=["alta", "media", "baixa", "info"].index
     )
     assert len({x.descricao for x in sinais}) == len(sinais)
+
+
+# --- Sinais repetidos e ordem ----------------------------------------------
+
+
+def ia(descricao, gravidade="alta"):
+    return Sinal(descricao=descricao, gravidade=gravidade, fonte="ia")
+
+
+@pytest.mark.parametrize("explicacao", [t[2] for t in TATICAS])
+def test_toda_tatica_tem_tema(explicacao):
+    # Sem tema, a regra não impediria a IA de repetir o mesmo assunto.
+    assert temas(explicacao)
+
+
+def test_frases_reais_do_gemini_que_repetem_as_regras_sao_removidas():
+    texto = "ENEL: será suspenso hoje. Oi mãe, número novo, faz um Pix? Não comenta com o pai " + montar_pix()
+    base = cruzar(texto, levantar_achados(texto))
+    repetidas = [
+        ia("Ameaça de corte imediato de energia (hoje às 18h) para gerar pânico."),
+        ia("Uso de pressão e ameaça de corte imediato para forçar o pagamento rápido."),
+        ia('Uso de tática emocional e pedido de segredo ("Não comenta com o pai") para evitar que a pessoa confirme.'),
+        ia("O recebedor do dinheiro é uma pessoa física em outra cidade, o que não acontece em contas de luz reais."),
+    ]
+    assert remover_repetidos(repetidas, base) == []
+
+
+def test_sinais_novos_da_ia_sao_mantidos():
+    texto = "Enel: será suspenso hoje"
+    base = cruzar(texto, levantar_achados(texto))
+    novos = [
+        ia("Uso de um número de celular comum para atendimento oficial.", "media"),
+        ia("Pedido para enviar o comprovante de pagamento na própria conversa.", "baixa"),
+        ia("O logotipo no print está distorcido.", "media"),
+    ]
+    assert remover_repetidos(novos, base) == novos
+
+
+def test_informacao_do_codigo_nao_cobre_o_assunto():
+    # "O Pix vai para X" é só informação; a IA ainda pode apontar que o nome não é do filho.
+    texto = "Oi, preciso de ajuda " + montar_pix(chave="a@b.com", nome="WELLINGTON S COSTA")
+    base = cruzar(texto, levantar_achados(texto))
+    novo = ia("O nome do recebedor do Pix (Wellington S Costa) provavelmente não é o nome do seu filho.")
+    assert remover_repetidos([novo], base) == [novo]
+
+
+def test_sinal_com_tema_novo_e_mantido_mesmo_citando_tema_coberto():
+    base = sinais_de_texto("urgente, pague hoje")
+    novo = ia("Pede urgência e também a senha do cartão.")
+    assert remover_repetidos([novo], base) == [novo]
+
+
+def test_frase_identica_e_removida():
+    base = [ia("Estranho.", "media")]
+    assert remover_repetidos([ia("Estranho.", "media")], base) == []
+
+
+def test_ordenar_por_gravidade_e_depois_por_origem():
+    sinais = [
+        Sinal(descricao="a", gravidade="media", fonte="verificador"),
+        Sinal(descricao="b", gravidade="alta", fonte="ia"),
+        Sinal(descricao="c", gravidade="alta", fonte="regra"),
+        Sinal(descricao="d", gravidade="alta", fonte="verificador"),
+        Sinal(descricao="e", gravidade="info", fonte="verificador"),
+    ]
+    assert [x.descricao for x in ordenar(sinais)] == ["d", "c", "b", "a", "e"]
