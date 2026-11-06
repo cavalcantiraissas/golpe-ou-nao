@@ -138,6 +138,24 @@ TATICAS: list[tuple[str, str, str]] = [
 ]
 
 
+# Assuntos dos sinais, para não repetir com outras palavras o que uma prova ou regra já disse.
+TEMAS: dict[str, str] = {
+    "pressa": r"press|urgen|ameac|\bcorte\b|cortad|suspens|imediat|prazo|panico",
+    "segredo": r"segredo|sigilo|nao comenta|nao conta|nao fala|escond",
+    "troca_de_numero": r"numero novo|novo numero|troc\w* de numero|mud\w* de numero|troc\w* de (celular|telefone)",
+    "recebedor": r"recebedor|pix vai para|vai para (uma )?pessoa|pessoa fisica|nome de quem recebe",
+    "codigo": r"\bcodigo\b.{0,30}(sms|whats|recebid|verificacao)",
+    "senha": r"senha|token|dados do cartao|dados bancarios",
+    "taxa": r"\btaxa\b",
+    "premio": r"premio|sorteado|ganhou",
+    "central": r"central de seguranca|compra suspeita|nao reconhecida",
+    "link": r"\blink\b|\bsite\b",
+}
+
+ORDEM_GRAVIDADE = {"alta": 0, "media": 1, "baixa": 2, "info": 3}
+ORDEM_FONTE = {"verificador": 0, "regra": 1, "ia": 2}
+
+
 @dataclass
 class Achados:
     """Tudo o que os verificadores encontraram, com a origem de cada código."""
@@ -169,6 +187,34 @@ def valores_mencionados(texto: str) -> list[Decimal]:
         except InvalidOperation:
             continue
     return valores
+
+
+def temas(descricao: str) -> set[str]:
+    norm = normalizar(descricao)
+    return {tema for tema, expr in TEMAS.items() if re.search(expr, norm)}
+
+
+def remover_repetidos(novos: list[Sinal], existentes: list[Sinal]) -> list[Sinal]:
+    """Tira dos novos sinais os que só repetem assuntos já cobertos (frase igual ou mesmo tema).
+
+    Um sinal sem tema reconhecido, ou com algum tema ainda não coberto, é mantido.
+    Sinais "info" não cobrem nada: só mostram o que o código revela.
+    """
+    frases = {s.descricao for s in existentes}
+    cobertos = set().union(*(temas(s.descricao) for s in existentes if s.gravidade != "info"))
+    mantidos = []
+    for sinal in novos:
+        assuntos = temas(sinal.descricao)
+        if sinal.descricao in frases or (assuntos and assuntos <= cobertos):
+            continue
+        mantidos.append(sinal)
+        frases.add(sinal.descricao)
+    return mantidos
+
+
+def ordenar(sinais: list[Sinal]) -> list[Sinal]:
+    """Mais graves primeiro; na mesma gravidade, provas antes de regras e regras antes da IA."""
+    return sorted(sinais, key=lambda s: (ORDEM_GRAVIDADE[s.gravidade], ORDEM_FONTE[s.fonte]))
 
 
 def reais(valor: Decimal) -> str:
@@ -379,10 +425,8 @@ def cruzar(texto: str, achados: Achados, marca_alegada: str | None = None) -> li
         sinais += sinais_de_link(link, marcas)
     sinais += sinais_de_texto(texto)
 
-    # Ordem: mais graves primeiro, sem repetir a mesma frase.
-    ordem = {"alta": 0, "media": 1, "baixa": 2, "info": 3}
     unicos = {s.descricao: s for s in sinais}
-    return sorted(unicos.values(), key=lambda s: ordem[s.gravidade])
+    return ordenar(list(unicos.values()))
 
 
 def nivel_pelos_sinais(sinais: list[Sinal]) -> Nivel:
