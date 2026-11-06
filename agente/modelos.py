@@ -39,6 +39,7 @@ class Veredito(BaseModel):
     sinais: list[Sinal] = Field(default_factory=list)
     o_que_fazer: list[str] = Field(default_factory=list)
     marca_alegada: str | None = Field(default=None, description="Quem a mensagem diz ser")
+    texto_do_print: str | None = Field(default=None, description="Texto da mensagem transcrito do print pela IA")
 
     pix: list[ResultadoPix] = Field(default_factory=list)
     boletos: list[ResultadoBoleto] = Field(default_factory=list)
