@@ -202,6 +202,23 @@ def test_ia_pode_acrescentar_suspeita():
     assert v.o_que_fazer == ["Ação da IA."]
 
 
+def test_sinal_da_ia_que_repete_uma_regra_e_descartado_e_a_ordem_e_unica():
+    texto = "Enel: seu fornecimento será suspenso hoje. Pague pelo Pix " + montar_pix(nome="ANA LIMA")
+    cliente = ClienteFalso(veredito(
+        "provavel_golpe",
+        sinais=[
+            {"descricao": "Ameaça de corte imediato para gerar pânico.", "gravidade": "alta"},
+            {"descricao": "Número de celular comum usado como atendimento oficial.", "gravidade": "media"},
+        ],
+    ))
+    v = analisar_mensagem(texto, cliente=cliente)
+    assert [(s.gravidade, s.fonte) for s in v.sinais] == [
+        ("alta", "verificador"),  # Pix para pessoa física
+        ("media", "regra"),  # pressa
+        ("media", "ia"),  # celular comum (a ameaça de corte foi descartada)
+    ]
+
+
 def test_sinal_da_ia_repetido_nao_duplica():
     texto = "Itaú " + montar_pix(nome="ANA LIMA")
     cliente = ClienteFalso(veredito(
