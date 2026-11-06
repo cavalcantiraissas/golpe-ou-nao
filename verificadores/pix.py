@@ -104,6 +104,40 @@ def extrair_pix(texto: str) -> list[str]:
     return codigos
 
 
+# Trocas comuns ao ler texto de uma imagem.
+CONFUSOES_DE_LEITURA = {
+    "0": "Oo", "O": "0", "o": "0",
+    "1": "Il", "I": "1l", "l": "1I",
+    "5": "S", "S": "5",
+    "8": "B", "B": "8",
+    "2": "Z", "Z": "2",
+    "6": "G", "G": "6",
+}
+
+
+def corrigir_leitura_pix(codigo: str) -> str | None:
+    """Tenta consertar um código lido de imagem usando o próprio CRC.
+
+    Testa cada troca comum de leitura (0/O, 1/I/l, 5/S, 8/B...) em uma posição
+    por vez. Devolve o código corrigido só se exatamente uma variante passar
+    na conferência completa; com mais de uma, a correção seria um chute.
+
+    Só uma troca é tentada de propósito: são cerca de 100 variantes para um
+    código típico, e a chance de alguma passar no CRC por acaso fica perto de
+    0,2%. Com duas trocas seriam milhares, e um falso acerto ficaria provável.
+    """
+    codigo = re.sub(r"[\r\n]+", "", codigo).strip()
+    if decodificar_pix(codigo).valido:
+        return codigo
+    corrigidos = []
+    for i, caractere in enumerate(codigo):
+        for troca in CONFUSOES_DE_LEITURA.get(caractere, ""):
+            candidato = codigo[:i] + troca + codigo[i + 1 :]
+            if decodificar_pix(candidato).valido:
+                corrigidos.append(candidato)
+    return corrigidos[0] if len(corrigidos) == 1 else None
+
+
 def decodificar_pix(codigo: str) -> ResultadoPix:
     """Abre um Pix copia e cola e devolve quem recebe o dinheiro de verdade."""
     codigo = re.sub(r"[\r\n]+", "", codigo).strip()
