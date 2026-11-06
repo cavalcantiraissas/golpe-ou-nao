@@ -86,6 +86,11 @@ DECLARACOES = [
                     "type": "string",
                     "description": "Uma ou duas frases simples, para alguém que não entende de tecnologia.",
                 },
+                "texto_do_print": {
+                    "type": "string",
+                    "description": "Se houver print, o texto da mensagem que aparece nele, transcrito "
+                    "fielmente, sem os códigos Pix e boletos. Vazio se não houver print.",
+                },
                 "marca_alegada": {
                     "type": "string",
                     "description": "Empresa, banco, órgão ou pessoa que a mensagem diz ser. Vazio se nenhuma.",
