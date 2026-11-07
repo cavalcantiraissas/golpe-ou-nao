@@ -2,6 +2,9 @@
 
 **Cole a mensagem suspeita e veja para quem o dinheiro iria de verdade.**
 
+**Experimente online: [golpe-ou-nao.streamlit.app](https://golpe-ou-nao.streamlit.app/)**
+
+[![Abrir no Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://golpe-ou-nao.streamlit.app/)
 [![Testes](https://github.com/cavalcantiraissas/golpe-ou-nao/actions/workflows/testes.yml/badge.svg)](https://github.com/cavalcantiraissas/golpe-ou-nao/actions/workflows/testes.yml)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Gemini API](https://img.shields.io/badge/Gemini_API-camada_gratuita-4285F4?logo=googlegemini&logoColor=white)](https://ai.google.dev/)
@@ -134,7 +137,7 @@ A tela foi pensada para quem não entende de tecnologia: cola a mensagem (ou env
 - **O que os códigos revelam**: um cartão por Pix, boleto ou link, com quem recebe, banco, valor, vencimento e se o código passou na conferência;
 - **Texto lido do print**, quando a mensagem veio como imagem.
 
-Na barra lateral, qualquer pessoa pode colar a **própria chave do Gemini** para ligar a IA. A chave fica só na sessão de quem está usando, não é salva nem aparece na página, e tem prioridade sobre a chave do servidor, se houver. Uma chave errada não trava nada: o veredito sai pelas verificações automáticas, com o aviso de que a chave foi recusada.
+A versão online está em [golpe-ou-nao.streamlit.app](https://golpe-ou-nao.streamlit.app/). Na barra lateral, qualquer pessoa pode colar a **própria chave do Gemini** para ligar a IA. A chave fica só na sessão de quem está usando, não é salva nem aparece na página, e tem prioridade sobre a chave do servidor, se houver. Uma chave errada não trava nada: o veredito sai pelas verificações automáticas, com o aviso de que a chave foi recusada.
 
 Há nove exemplos prontos em [`exemplos/mensagens.json`](exemplos/mensagens.json), para experimentar sem ter um golpe em mãos:
 
