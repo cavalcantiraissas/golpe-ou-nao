@@ -198,7 +198,7 @@ ESTILO = """
   --gn-ok: #067647;      --gn-ok-fundo: #ecfdf3;
   --gn-info: #475467;
 }
-.block-container { padding-top: 2.5rem; max-width: 760px; }
+.block-container { padding-top: 4.5rem; max-width: 760px; }  /* abaixo da barra do topo do Streamlit */
 .gn-cabecalho { margin-bottom: .5rem; }
 .gn-sobretitulo { color: var(--gn-marca); font-size: .78rem; font-weight: 600; letter-spacing: .08em;
   text-transform: uppercase; margin: 0 0 .25rem; }
