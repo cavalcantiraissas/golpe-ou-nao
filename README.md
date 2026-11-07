@@ -31,6 +31,7 @@ Detectores comuns só leem o texto e dão um palpite. Este **abre os códigos**.
 - [Os verificadores](#os-verificadores)
 - [O agente](#o-agente)
 - [A interface](#a-interface)
+- [Privacidade](#privacidade)
 - [Início rápido](#início-rápido)
 - [Exemplos de uso](#exemplos-de-uso)
 - [Testes](#testes)
@@ -154,6 +155,14 @@ Há nove exemplos prontos em [`exemplos/mensagens.json`](exemplos/mensagens.json
 | Print: filho com número novo | Conversa de WhatsApp em print (precisa da IA para ler) | — |
 
 Os prints são sintéticos, com nomes e chaves fictícios, e podem ser refeitos com [`exemplos/gerar_prints.py`](exemplos/gerar_prints.py). Os códigos Pix desenhados neles têm CRC válido, então a IA lê o print e o verificador confere o recebedor.
+
+## Privacidade
+
+Quando a IA está ligada, o texto e o print são enviados à API do Gemini. Na camada gratuita, o Google pode usar esse conteúdo para melhorar os produtos dele, inclusive com revisão humana. Antes de colar, apague nomes, telefones e dados que você não quer compartilhar.
+
+Sem chave do Gemini, a mensagem e o print não saem do servidor do app. A única exceção é a consulta opcional ao Google Safe Browsing: quando ela está configurada (`GOOGLE_SAFE_BROWSING_KEY`), só os endereços dos links encontrados são enviados ao Google.
+
+O Golpe ou Não não salva mensagens nem prints: tudo fica na memória da sessão e some quando a página é fechada.
 
 ## Início rápido
 

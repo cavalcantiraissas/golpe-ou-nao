@@ -149,6 +149,7 @@ def main() -> None:
         height=150,
         placeholder="Cole aqui a mensagem do WhatsApp, SMS ou e-mail, com o código Pix, o boleto ou o link.",
     )
+    st.caption("Com a IA ligada, a mensagem é enviada ao Google. Apague dados pessoais antes de colar.")
     enviado = st.file_uploader(
         "Ou envie um print da conversa", type=TIPOS_DE_IMAGEM, key=f"print-{st.session_state.envio}"
     )

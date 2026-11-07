@@ -46,6 +46,10 @@ def test_tela_inicial_mostra_exemplos_e_ia_desligada(app):
     assert "IA desligada" in html(app)
 
 
+def test_aviso_de_privacidade_perto_da_mensagem(app):
+    assert any("a mensagem é enviada ao Google" in c.value for c in app.caption)
+
+
 def test_exemplo_preenche_o_texto(app):
     escolher(app, "conta-de-luz")
     assert app.text_area(key="texto").value.startswith("ENEL INFORMA")
