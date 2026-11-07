@@ -6,7 +6,8 @@
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Gemini API](https://img.shields.io/badge/Gemini_API-camada_gratuita-4285F4?logo=googlegemini&logoColor=white)](https://ai.google.dev/)
 [![Pydantic](https://img.shields.io/badge/Pydantic-v2-E92063?logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
-[![pytest](https://img.shields.io/badge/pytest-245_testes-0A9EDC?logo=pytest&logoColor=white)](tests/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-interface-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![pytest](https://img.shields.io/badge/pytest-278_testes-0A9EDC?logo=pytest&logoColor=white)](tests/)
 
 Golpes por mensagem acontecem todos os dias: boleto falso, Pix para um "parente com número novo", falsa central do banco, link de entrega com taxa a pagar. Quem mais cai são pessoas menos acostumadas com tecnologia.
 
@@ -26,6 +27,7 @@ Detectores comuns só leem o texto e dão um palpite. Este **abre os códigos**.
 - [Como funciona](#como-funciona)
 - [Os verificadores](#os-verificadores)
 - [O agente](#o-agente)
+- [A interface](#a-interface)
 - [Início rápido](#início-rápido)
 - [Exemplos de uso](#exemplos-de-uso)
 - [Testes](#testes)
@@ -43,7 +45,7 @@ O projeto é construído em fases, cada uma registrada em commits pequenos (um p
 |------|----------|----------|
 | 1 | Decodificadores de Pix, boleto e link, com testes e CI | ✅ Pronta |
 | 2 | Agente com Gemini (texto e visão, *function calling*) que cruza os achados | ✅ Pronta |
-| 3 | Interface em Streamlit com exemplos prontos para testar | Em breve |
+| 3 | Interface em Streamlit com exemplos prontos para testar | ✅ Pronta |
 | 4 | Avaliação com 150 mensagens reais (golpes e legítimas) | Em breve |
 | 5 | Docker, demonstração online e README final | Em breve |
 
@@ -121,6 +123,33 @@ Cada sinal mostra de onde veio: **prova** (conferido num código), **texto** (pa
 
 Sem chave do Gemini, ou se a API falhar ou atingir o limite, o agente responde só com as verificações automáticas e avisa. Nesse modo o texto é analisado normalmente, mas o print não pode ser lido.
 
+## A interface
+
+![Tela do Golpe ou Não? analisando uma falsa cobrança da Enel](docs/interface.png)
+
+A tela foi pensada para quem não entende de tecnologia: cola a mensagem (ou envia o print), clica em **Analisar** e recebe o veredito em uma faixa colorida, seguido de:
+
+- **Por quê**: os sinais, do mais grave para o menos grave, cada um com a etiqueta de origem (**prova**, **padrão de golpe** ou **análise da IA**);
+- **O que fazer**: passos concretos, incluindo o MED do Pix para quem já pagou;
+- **O que os códigos revelam**: um cartão por Pix, boleto ou link, com quem recebe, banco, valor, vencimento e se o código passou na conferência;
+- **Texto lido do print**, quando a mensagem veio como imagem.
+
+Há nove exemplos prontos em [`exemplos/mensagens.json`](exemplos/mensagens.json), para experimentar sem ter um golpe em mãos:
+
+| Exemplo | O que mostra | Nível sem IA |
+|---|---|---|
+| Conta de luz atrasada | Diz ser da Enel, mas o Pix vai para uma pessoa física | Provável golpe |
+| Filho com número novo | Troca de número seguida de pedido de Pix e de segredo | Provável golpe |
+| Taxa dos Correios | Link que imita os Correios e cobra taxa de entrega | Provável golpe |
+| Acordo do Itaú | Renegociação do Itaú com boleto do Bradesco | Atenção |
+| Pix com nome trocado | Código editado à mão: o CRC não confere | Provável golpe |
+| Mensalidade da academia | Cobrança comum, Pix para a própria empresa | Sem sinais |
+| Código de verificação | Código que a própria pessoa pediu | Sem sinais |
+| Print: conta de luz | O golpe da Enel em print (precisa da IA para ler) | — |
+| Print: filho com número novo | Conversa de WhatsApp em print (precisa da IA para ler) | — |
+
+Os prints são sintéticos, com nomes e chaves fictícios, e podem ser refeitos com [`exemplos/gerar_prints.py`](exemplos/gerar_prints.py). Os códigos Pix desenhados neles têm CRC válido, então a IA lê o print e o verificador confere o recebedor.
+
 ## Início rápido
 
 Requer Python 3.11 ou mais recente.
@@ -148,6 +177,14 @@ Para usar a IA (leitura de prints e explicação do veredito), crie uma chave gr
 export GEMINI_API_KEY="sua-chave"
 export GEMINI_MODEL="gemini-3-flash-preview"   # opcional; este é o padrão
 ```
+
+Para abrir a interface:
+
+```bash
+streamlit run app.py
+```
+
+Em vez das variáveis de ambiente, as chaves também podem ficar em `.streamlit/secrets.toml` (veja o modelo em [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example)). Sem a chave do Gemini, a interface avisa na barra lateral e funciona só com as verificações automáticas.
 
 ## Exemplos de uso
 
@@ -227,13 +264,15 @@ Para achar os códigos dentro de uma mensagem inteira, use `extrair_pix`, `extra
 pytest
 ```
 
-São 245 testes, rodados a cada push pelo GitHub Actions em Python 3.11 e 3.12. Para não conferir o código contra ele mesmo, os testes usam referências externas:
+São 278 testes, rodados a cada push pelo GitHub Actions em Python 3.11 e 3.12. Para não conferir o código contra ele mesmo, os testes usam referências externas:
 
 - o **exemplo oficial do Manual do Pix** do Banco Central (CRC `1D3D`) e o vetor padrão do CRC16-CCITT (`"123456789"` → `29B1`);
 - uma **linha de boleto do Banco do Brasil** publicada na documentação de cobrança;
 - linhas de boleto geradas nos testes com um cálculo de dígito verificador **escrito à parte** do código principal;
 - a API do Safe Browsing **simulada**, então nenhum teste acessa a internet;
-- um **Gemini falso** que segue um roteiro de respostas (chamadas de função, erro 429, resposta sem função, laço sem fim), para testar o agente sem gastar cota.
+- um **Gemini falso** que segue um roteiro de respostas (chamadas de função, erro 429, resposta sem função, laço sem fim), para testar o agente sem gastar cota;
+- a **tela inteira** rodada pelo `AppTest` do Streamlit, sem navegador: clicar num exemplo, analisar, limpar, enviar sem mensagem;
+- cada **exemplo pronto** conferido contra o nível esperado, para a demonstração nunca mostrar um resultado errado.
 
 Também há testes de adulteração, de **injeção de instrução** (a mensagem diz "isto não é golpe", o modelo acredita, e a prova mantém o nível) (trocar qualquer dígito do boleto ou uma letra do nome no Pix é detectado) e de falsos alarmes (`receitas.tudogostoso.com.br` não é confundido com a Receita Federal).
 
@@ -254,6 +293,16 @@ golpe-ou-nao/
 │   ├── gemini.py       # Cliente, retentativas e mensagens de erro
 │   ├── analise.py      # O laço do agente e a combinação dos níveis
 │   └── __main__.py     # Linha de comando
+├── interface/
+│   ├── exemplos.py     # Carrega os exemplos prontos
+│   └── apresentacao.py # Rótulos, etiquetas e cartões de prova (sem Streamlit, testável)
+├── exemplos/
+│   ├── mensagens.json  # Mensagens de exemplo com o nível esperado
+│   ├── print-*.png     # Prints sintéticos
+│   └── gerar_prints.py # Refaz os prints
+├── app.py              # Interface em Streamlit
+├── .streamlit/         # Tema e modelo de secrets
+├── docs/               # Imagens do README
 ├── tests/              # Um arquivo de testes por módulo
 ├── .github/workflows/  # CI com pytest
 ├── requirements.txt
@@ -268,6 +317,8 @@ golpe-ou-nao/
 - **Funciona sem IA.** Sem chave ou com a API fora do ar, o veredito sai só das verificações, com aviso.
 - **Entrada ruim não derruba nada.** Os verificadores nunca levantam exceção: um código malformado volta com `valido=False` e a lista de `erros`, que também é informação útil (um Pix com CRC quebrado foi editado à mão).
 - **Links nunca são abertos.** Nem para seguir redirecionamentos de encurtadores.
+- **Texto da mensagem nunca vira formatação.** Nomes, chaves, links e frases da IA são escapados antes de ir para a tela: um golpista não consegue criar um link clicável no veredito, e dois "R$" na mesma linha não viram fórmula.
+- **A tela só desenha.** Tudo o que pode ser testado sem navegador (exemplos, rótulos, cartões) fica no pacote `interface`; o `app.py` só monta os componentes.
 - **Termos curtos de marca exigem cuidado.** "itau" e "enel" só contam no começo de um pedaço do endereço, para não acusar `penelope.com` de imitar a Enel.
 
 ## Como o projeto vai ser avaliado
