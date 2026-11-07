@@ -1,0 +1,74 @@
+[
+  {
+    "id": "conta-de-luz",
+    "titulo": "Conta de luz atrasada",
+    "descricao": "Diz ser da Enel e cobra por Pix.",
+    "texto": "ENEL INFORMA: identificamos 2 faturas em atraso no valor de R$ 247,30. Seu fornecimento será suspenso HOJE às 18h. Para evitar o corte, pague pelo Pix copia e cola:\n00020126330014br.gov.bcb.pix0111123456789095204000053039865406247.305802BR5918RODRIGO A FERREIRA6006MANAUS62070503***630488FE",
+    "imagem": null,
+    "nivel_esperado": "provavel_golpe"
+  },
+  {
+    "id": "filho-numero-novo",
+    "titulo": "Filho com número novo",
+    "descricao": "Parente que trocou de número e pede um Pix.",
+    "texto": "Oi mãe, esse é meu número novo, o outro deu problema. Tô precisando pagar uma conta hoje e meu app tá bloqueado. Faz esse Pix pra mim? Amanhã te devolvo. Não conta pro pai.\n00020126520014br.gov.bcb.pix0130pagamentos.rapidos77@gmail.com52040000530398654071850.005802BR5918WELLINGTON S COSTA6009SAO PAULO62070503***630452C0",
+    "imagem": null,
+    "nivel_esperado": "provavel_golpe"
+  },
+  {
+    "id": "taxa-correios",
+    "titulo": "Taxa dos Correios",
+    "descricao": "Encomenda retida e link para pagar taxa.",
+    "texto": "Correios: sua encomenda está retida na fiscalização. Pague a taxa de liberação de R$ 4,90 em até 24 horas: http://correios-rastreio.top/taxa",
+    "imagem": null,
+    "nivel_esperado": "provavel_golpe"
+  },
+  {
+    "id": "boleto-renegociacao",
+    "titulo": "Acordo do Itaú",
+    "descricao": "Renegociação de dívida com boleto de outro banco.",
+    "texto": "Itaú: sua proposta de acordo foi aprovada com 80% de desconto. Pague o boleto abaixo ainda hoje para garantir a condição:\n23794444474444444444044444444440817200000058940",
+    "imagem": null,
+    "nivel_esperado": "atencao"
+  },
+  {
+    "id": "pix-alterado",
+    "titulo": "Pix com nome trocado",
+    "descricao": "Código que alguém editou à mão para mudar o recebedor.",
+    "texto": "Bella Moda: obrigada pela compra! Segue o Pix para finalizar o pedido:\n00020126360014br.gov.bcb.pix0114+5521988887777520400005303986540589.905802BR5915LOJA BELLA MODA6014RIO DE JANEIRO62070503***6304C164",
+    "imagem": null,
+    "nivel_esperado": "provavel_golpe"
+  },
+  {
+    "id": "mensalidade-academia",
+    "titulo": "Mensalidade da academia",
+    "descricao": "Cobrança comum, Pix para a própria empresa.",
+    "texto": "Academia Forma Viva: olá! Sua mensalidade de novembro (R$ 129,90) vence dia 10. Se preferir, pague pelo Pix:\n00020126360014br.gov.bcb.pix0114112223330001815204000053039865406129.905802BR5924ACADEMIA FORMA VIVA LTDA6006RECIFE62140510MENS112026630487E6",
+    "imagem": null,
+    "nivel_esperado": "sem_sinais"
+  },
+  {
+    "id": "codigo-verificacao",
+    "titulo": "Código de verificação",
+    "descricao": "Código que a própria pessoa pediu ao entrar no app.",
+    "texto": "Seu código de acesso é 482913. Ele vale por 5 minutos. Não compartilhe este código com ninguém.",
+    "imagem": null,
+    "nivel_esperado": "sem_sinais"
+  },
+  {
+    "id": "print-conta-de-luz",
+    "titulo": "Print: conta de luz",
+    "descricao": "O mesmo golpe da Enel, mas em print.",
+    "texto": "",
+    "imagem": "print-enel.png",
+    "nivel_esperado": "provavel_golpe"
+  },
+  {
+    "id": "print-filho",
+    "titulo": "Print: filho com número novo",
+    "descricao": "Conversa de WhatsApp em print.",
+    "texto": "",
+    "imagem": "print-filho.png",
+    "nivel_esperado": "provavel_golpe"
+  }
+]
