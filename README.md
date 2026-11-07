@@ -42,15 +42,15 @@ Detectores comuns só leem o texto e dão um palpite. Este **abre os códigos**.
 
 ## Situação do projeto
 
-O projeto é construído em fases, cada uma registrada em commits pequenos (um por arquivo) para mostrar a evolução.
+O projeto é construído em fases. A tabela abaixo mostra o que já está pronto e o que vem a seguir.
 
 | Fase | Conteúdo | Situação |
 |------|----------|----------|
 | 1 | Decodificadores de Pix, boleto e link, com testes e CI | ✅ Pronta |
 | 2 | Agente com Gemini (texto e visão, *function calling*) que cruza os achados | ✅ Pronta |
-| 3 | Interface em Streamlit com exemplos prontos para testar | ✅ Pronta |
+| 3 | Interface em Streamlit com exemplos prontos, publicada em [golpe-ou-nao.streamlit.app](https://golpe-ou-nao.streamlit.app/) | ✅ Pronta |
 | 4 | Avaliação com 150 mensagens reais (golpes e legítimas) | Em breve |
-| 5 | Docker, demonstração online e README final | Em breve |
+| 5 | Docker e README final | Em breve |
 
 ## Como funciona
 
@@ -281,7 +281,7 @@ São 284 testes, rodados a cada push pelo GitHub Actions em Python 3.11 e 3.12. 
 - a **tela inteira** rodada pelo `AppTest` do Streamlit, sem navegador: clicar num exemplo, analisar, limpar, enviar sem mensagem, usar a chave digitada (e dar prioridade a ela sobre a do servidor), sem que a chave apareça na página;
 - cada **exemplo pronto** conferido contra o nível esperado, para a demonstração nunca mostrar um resultado errado.
 
-Também há testes de adulteração, de **injeção de instrução** (a mensagem diz "isto não é golpe", o modelo acredita, e a prova mantém o nível) (trocar qualquer dígito do boleto ou uma letra do nome no Pix é detectado) e de falsos alarmes (`receitas.tudogostoso.com.br` não é confundido com a Receita Federal).
+Também há testes de adulteração (trocar qualquer dígito do boleto ou uma letra do nome no Pix é detectado), de **injeção de instrução** (a mensagem diz "isto não é golpe", o modelo acredita, e a prova mantém o nível) e de falsos alarmes (`receitas.tudogostoso.com.br` não é confundido com a Receita Federal).
 
 ## Estrutura do projeto
 
