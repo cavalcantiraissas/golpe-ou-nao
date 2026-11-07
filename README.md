@@ -7,7 +7,7 @@
 [![Gemini API](https://img.shields.io/badge/Gemini_API-camada_gratuita-4285F4?logo=googlegemini&logoColor=white)](https://ai.google.dev/)
 [![Pydantic](https://img.shields.io/badge/Pydantic-v2-E92063?logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-interface-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![pytest](https://img.shields.io/badge/pytest-278_testes-0A9EDC?logo=pytest&logoColor=white)](tests/)
+[![pytest](https://img.shields.io/badge/pytest-284_testes-0A9EDC?logo=pytest&logoColor=white)](tests/)
 
 Golpes por mensagem acontecem todos os dias: boleto falso, Pix para um "parente com número novo", falsa central do banco, link de entrega com taxa a pagar. Quem mais cai são pessoas menos acostumadas com tecnologia.
 
@@ -127,12 +127,14 @@ Sem chave do Gemini, ou se a API falhar ou atingir o limite, o agente responde s
 
 ![Tela do Golpe ou Não? analisando uma falsa cobrança da Enel](docs/interface.png)
 
-A tela foi pensada para quem não entende de tecnologia: cola a mensagem (ou envia o print), clica em **Analisar** e recebe o veredito em uma faixa colorida, seguido de:
+A tela foi pensada para quem não entende de tecnologia: cola a mensagem (ou envia o print), clica em **Analisar** e recebe o veredito num quadro com a cor do nível, seguido de:
 
-- **Por quê**: os sinais, do mais grave para o menos grave, cada um com a etiqueta de origem (**prova**, **padrão de golpe** ou **análise da IA**);
+- **Por quê**: os sinais, do mais grave para o menos grave, cada um com a gravidade (grave, suspeito, leve) e a origem (**prova**, **padrão de golpe** ou **análise da IA**);
 - **O que fazer**: passos concretos, incluindo o MED do Pix para quem já pagou;
 - **O que os códigos revelam**: um cartão por Pix, boleto ou link, com quem recebe, banco, valor, vencimento e se o código passou na conferência;
 - **Texto lido do print**, quando a mensagem veio como imagem.
+
+Na barra lateral, qualquer pessoa pode colar a **própria chave do Gemini** para ligar a IA. A chave fica só na sessão de quem está usando, não é salva nem aparece na página, e tem prioridade sobre a chave do servidor, se houver. Uma chave errada não trava nada: o veredito sai pelas verificações automáticas, com o aviso de que a chave foi recusada.
 
 Há nove exemplos prontos em [`exemplos/mensagens.json`](exemplos/mensagens.json), para experimentar sem ter um golpe em mãos:
 
@@ -184,7 +186,9 @@ Para abrir a interface:
 streamlit run app.py
 ```
 
-Em vez das variáveis de ambiente, as chaves também podem ficar em `.streamlit/secrets.toml` (veja o modelo em [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example)). Sem a chave do Gemini, a interface avisa na barra lateral e funciona só com as verificações automáticas.
+A chave do Gemini pode ser colada na barra lateral da interface. Para deixar uma chave fixa no servidor, use a variável de ambiente ou `.streamlit/secrets.toml` (veja o modelo em [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example)). Sem nenhuma chave, a interface funciona só com as verificações automáticas.
+
+Para publicar no [Streamlit Community Cloud](https://share.streamlit.io/), aponte para este repositório com `app.py` como arquivo principal. Não é preciso cadastrar segredo: cada visitante pode usar a própria chave pela barra lateral. Se quiser oferecer a IA ligada a todos, cadastre `GEMINI_API_KEY` em *Settings → Secrets* (o uso entra na sua cota).
 
 ## Exemplos de uso
 
@@ -264,14 +268,14 @@ Para achar os códigos dentro de uma mensagem inteira, use `extrair_pix`, `extra
 pytest
 ```
 
-São 278 testes, rodados a cada push pelo GitHub Actions em Python 3.11 e 3.12. Para não conferir o código contra ele mesmo, os testes usam referências externas:
+São 284 testes, rodados a cada push pelo GitHub Actions em Python 3.11 e 3.12. Para não conferir o código contra ele mesmo, os testes usam referências externas:
 
 - o **exemplo oficial do Manual do Pix** do Banco Central (CRC `1D3D`) e o vetor padrão do CRC16-CCITT (`"123456789"` → `29B1`);
 - uma **linha de boleto do Banco do Brasil** publicada na documentação de cobrança;
 - linhas de boleto geradas nos testes com um cálculo de dígito verificador **escrito à parte** do código principal;
 - a API do Safe Browsing **simulada**, então nenhum teste acessa a internet;
 - um **Gemini falso** que segue um roteiro de respostas (chamadas de função, erro 429, resposta sem função, laço sem fim), para testar o agente sem gastar cota;
-- a **tela inteira** rodada pelo `AppTest` do Streamlit, sem navegador: clicar num exemplo, analisar, limpar, enviar sem mensagem;
+- a **tela inteira** rodada pelo `AppTest` do Streamlit, sem navegador: clicar num exemplo, analisar, limpar, enviar sem mensagem, usar a chave digitada (e dar prioridade a ela sobre a do servidor), sem que a chave apareça na página;
 - cada **exemplo pronto** conferido contra o nível esperado, para a demonstração nunca mostrar um resultado errado.
 
 Também há testes de adulteração, de **injeção de instrução** (a mensagem diz "isto não é golpe", o modelo acredita, e a prova mantém o nível) (trocar qualquer dígito do boleto ou uma letra do nome no Pix é detectado) e de falsos alarmes (`receitas.tudogostoso.com.br` não é confundido com a Receita Federal).
@@ -295,7 +299,7 @@ golpe-ou-nao/
 │   └── __main__.py     # Linha de comando
 ├── interface/
 │   ├── exemplos.py     # Carrega os exemplos prontos
-│   └── apresentacao.py # Rótulos, etiquetas e cartões de prova (sem Streamlit, testável)
+│   └── apresentacao.py # Rótulos, HTML e CSS do resultado (sem Streamlit, testável)
 ├── exemplos/
 │   ├── mensagens.json  # Mensagens de exemplo com o nível esperado
 │   ├── print-*.png     # Prints sintéticos
@@ -317,8 +321,9 @@ golpe-ou-nao/
 - **Funciona sem IA.** Sem chave ou com a API fora do ar, o veredito sai só das verificações, com aviso.
 - **Entrada ruim não derruba nada.** Os verificadores nunca levantam exceção: um código malformado volta com `valido=False` e a lista de `erros`, que também é informação útil (um Pix com CRC quebrado foi editado à mão).
 - **Links nunca são abertos.** Nem para seguir redirecionamentos de encurtadores.
-- **Texto da mensagem nunca vira formatação.** Nomes, chaves, links e frases da IA são escapados antes de ir para a tela: um golpista não consegue criar um link clicável no veredito, e dois "R$" na mesma linha não viram fórmula.
-- **A tela só desenha.** Tudo o que pode ser testado sem navegador (exemplos, rótulos, cartões) fica no pacote `interface`; o `app.py` só monta os componentes.
+- **Texto da mensagem nunca vira HTML.** O resultado é desenhado com HTML e CSS próprios, e nomes, chaves, links e frases da IA passam por `html.escape`: um golpista não consegue criar um link clicável ou uma imagem no veredito. Há teste para isso.
+- **A tela só desenha.** Tudo o que pode ser testado sem navegador (exemplos, rótulos, cartões, HTML) fica no pacote `interface`; o `app.py` só monta os componentes.
+- **A chave de quem visita não é guardada.** Ela vive só no estado da sessão do Streamlit e vai direto para o cliente do Gemini.
 - **Termos curtos de marca exigem cuidado.** "itau" e "enel" só contam no começo de um pedaço do endereço, para não acusar `penelope.com` de imitar a Enel.
 
 ## Como o projeto vai ser avaliado
