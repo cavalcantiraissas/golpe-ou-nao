@@ -5,6 +5,9 @@ Gerado por `python -m avaliacao`. O conjunto e o método estão em [avaliacao/RE
 | Modo | Golpes pegos | Golpes com "provável golpe" | Alarme falso | Legítimas com "atenção" |
 | --- | --- | --- | --- | --- |
 | Sem IA (verificadores e regras) | 58/75 (77%) | 32/75 (43%) | 0/75 (0%) | 6/75 (8%) |
+| Com IA (127 ainda sem resultado) | 23/23 (100%) | 21/23 (91%) | 0/0 (-) | 0/0 (-) |
+
+Com IA (127 ainda sem resultado): modelo `gemini-3-flash-preview`, rodado em 2026-11-08.
 
 ## Sem IA (verificadores e regras)
 
@@ -59,3 +62,27 @@ Legítimas marcadas com atenção (6):
 - `legitima-059`: Amazon: último dia da oferta relâmpago, aproveite em https://www.amazon.com.br/deals
 - `legitima-060`: Mercado Livre: você ganhou frete grátis na próxima compra! Use até 30/11 no app.
 - `legitima-072`: Enel: devido a uma manutenção programada, o fornecimento será suspenso no dia 14/11, das 8h às 12h, na sua ...
+
+## Com IA (127 ainda sem resultado)
+
+| Classe | Provável golpe | Atenção | Sem sinais |
+| --- | --- | --- | --- |
+| Golpes | 21 | 2 | 0 |
+| Legítimas | 0 | 0 | 0 |
+
+Golpes por tipo:
+
+| Tipo | Pegos | Provável golpe | Sem sinais |
+| --- | --- | --- | --- |
+| conta_de_consumo | 8/8 | 8 | 0 |
+| entrega | 3/3 | 3 | 0 |
+| falso_parente | 12/12 | 10 | 0 |
+
+Golpes que passaram sem sinais (0):
+nenhuma.
+
+Legítimas marcadas como provável golpe (0):
+nenhuma.
+
+Legítimas marcadas com atenção (0):
+nenhuma.
