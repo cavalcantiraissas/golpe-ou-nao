@@ -1,0 +1,902 @@
+[
+ {
+  "id": "golpe-001",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Oi mãe, troquei de número, salva esse aí. O outro celular caiu na água."
+ },
+ {
+  "id": "golpe-002",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Pai, sou eu. Tô com número novo. Consegue me fazer um Pix de R$ 600,00? Pago amanhã sem falta.\n00020126500014br.gov.bcb.pix0128marcos.oliveira.pg@gmail.com5204000053039865406600.005802BR5917MARCOS V OLIVEIRA6008CAMPINAS62070503***6304D45D"
+ },
+ {
+  "id": "golpe-003",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Oi tia, aqui é a Ju, esse é meu novo número. Tô no mercado e meu cartão não passou, me empresta R$ 230 no Pix? A chave é 11987654321, tá no nome da minha amiga."
+ },
+ {
+  "id": "golpe-004",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Vó, perdi meu celular, tô usando o da minha colega. Preciso pagar a passagem pra voltar, manda R$ 150,00 nesse Pix aqui:\n00020126330014br.gov.bcb.pix0111405182736115204000053039865406150.005802BR5914DAIANE S MOURA6007GOIANIA62070503***630437FA"
+ },
+ {
+  "id": "golpe-005",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Amor, esse é meu número novo do trabalho. Faz uma transferência de R$ 1.200 pra essa conta que depois te explico, é urgente. Agência 0001 conta 88213-4."
+ },
+ {
+  "id": "golpe-006",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Oi, é o Rafa! Mudei de número. Tem como me ajudar com um boleto que vence hoje? Te devolvo sexta.\n23791.23454 67890.123457 67890.123457 3 16360000078450"
+ },
+ {
+  "id": "golpe-007",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Mãe, tô sem crédito no outro chip, me chama por aqui. Preciso de um favor mas não conta pro pai ainda."
+ },
+ {
+  "id": "golpe-008",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Filha, aqui é a mamãe. Esse é o número novo do trabalho. Me manda o código de 6 dígitos que chegou no seu WhatsApp, eu mandei sem querer."
+ },
+ {
+  "id": "golpe-009",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Mano, tô num aperto. O app do banco travou e preciso pagar o aluguel hoje. Faz esse Pix e amanhã te passo de volta, beleza?\n00020126330014br.gov.bcb.pix0111712345098765204000053039865406980.005802BR5915JEFERSON A LIMA6006OSASCO62070503***63042EE4"
+ },
+ {
+  "id": "golpe-010",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Oi pai, número novo! Me adiciona aí que depois te mando uma coisa."
+ },
+ {
+  "id": "golpe-011",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Oi filho, é a mãe, celular novo. Preciso pagar o remédio na farmácia e esqueci a senha do app. Paga pra mim? R$ 340,00\n00020126330014br.gov.bcb.pix0111389127645015204000053039865406340.005802BR5918ROSANGELA T VIEIRA6009SAO PAULO62070503***63044E61"
+ },
+ {
+  "id": "golpe-012",
+  "classe": "golpe",
+  "categoria": "falso_parente",
+  "texto": "Dinda, sou eu, o Lucas, esse é meu novo número. Tô precisando de R$ 80 pro Uber, me empresta? Chave Pix: lucas.pagamentos2026@gmail.com"
+ },
+ {
+  "id": "golpe-013",
+  "classe": "golpe",
+  "categoria": "conta_de_consumo",
+  "texto": "ENEL INFORMA: identificamos 2 faturas em atraso no valor de R$ 247,30. Seu fornecimento será suspenso HOJE às 18h. Para evitar o corte, pague pelo Pix copia e cola:\n00020126330014br.gov.bcb.pix0111123456789095204000053039865406247.305802BR5918RODRIGO A FERREIRA6006MANAUS62070503***630488FE"
+ },
+ {
+  "id": "golpe-014",
+  "classe": "golpe",
+  "categoria": "conta_de_consumo",
+  "texto": "SABESP: débito pendente de R$ 186,40. Regularize nas próximas 24 horas para evitar o corte. Pague via Pix:\n00020126470014br.gov.bcb.pix0125paulo.rsantos88@gmail.com5204000053039865406186.405802BR5914PAULO R SANTOS6009GUARULHOS62070503***63041563"
+ },
+ {
+  "id": "golpe-015",
+  "classe": "golpe",
+  "categoria": "conta_de_consumo",
+  "texto": "CEMIG: sua fatura venceu. Para evitar a suspensão do fornecimento, pague o boleto abaixo:\n23791.23454 67890.123457 67890.123457 3 16360000021390"
+ },
+ {
+  "id": "golpe-016",
+  "classe": "golpe",
+  "categoria": "conta_de_consumo",
+  "texto": "Copasa informa: fatura de outubro em aberto, R$ 98,20. Pague pelo código abaixo:\n836300000004 982000482025 611150000127 345678901231"
+ },
+ {
+  "id": "golpe-017",
+  "classe": "golpe",
+  "categoria": "conta_de_consumo",
+  "texto": "CPFL: você tem direito a 30% de desconto na conta de luz pagando hoje pelo Pix:\n00020126360014br.gov.bcb.pix0114345678900001555204000053039865406152.605802BR5922PAGFACIL SERVICOS LTDA6009SAO PAULO62070503***6304345B"
+ },
+ {
+  "id": "golpe-018",
+  "classe": "golpe",
+  "categoria": "conta_de_consumo",
+  "texto": "Neoenergia Coelba: sua energia será cortada amanhã. Acesse coelba-segundavia.site e pague a segunda via."
+ },
+ {
+  "id": "golpe-019",
+  "classe": "golpe",
+  "categoria": "conta_de_consumo",
+  "texto": "Enel: identificamos consumo irregular no seu medidor. Multa de R$ 1.450,00. Para não ter o nome negativado, pague:\n00020126330014br.gov.bcb.pix01116023841759052040000530398654071450.005802BR5916ANDERSON L COSTA6009FORTALEZA62070503***63045F13"
+ },
+ {
+  "id": "golpe-020",
+  "classe": "golpe",
+  "categoria": "conta_de_consumo",
+  "texto": "Embasa: conta de água atrasada. Evite o corte pagando agora pelo Pix, chave 71988776655."
+ },
+ {
+  "id": "golpe-021",
+  "classe": "golpe",
+  "categoria": "entrega",
+  "texto": "Correios: sua encomenda está retida na fiscalização. Pague a taxa de liberação de R$ 4,90 em até 24 horas: http://correios-rastreio.top/taxa"
+ },
+ {
+  "id": "golpe-022",
+  "classe": "golpe",
+  "categoria": "entrega",
+  "texto": "Seu pacote não pôde ser entregue por endereço incompleto. Atualize em https://entregas-br.click/atualizar"
+ },
+ {
+  "id": "golpe-023",
+  "classe": "golpe",
+  "categoria": "entrega",
+  "texto": "CORREIOS: objeto BR482917345BR taxado. Taxa de desembaraço R$ 12,67. Pague via Pix:\n00020126330014br.gov.bcb.pix011151839027461520400005303986540512.675802BR5914CLAUDIO M REIS6008CURITIBA62070503***630427E5"
+ },
+ {
+  "id": "golpe-024",
+  "classe": "golpe",
+  "categoria": "entrega",
+  "texto": "Sua encomenda da Shopee está retida na alfândega. Pague a taxa de liberação: https://bit.ly/3xR7taxa"
+ },
+ {
+  "id": "golpe-025",
+  "classe": "golpe",
+  "categoria": "entrega",
+  "texto": "Jadlog: tentativa de entrega sem sucesso. Reagende pelo link: http://jadlog-reentrega.com/r/8812"
+ },
+ {
+  "id": "golpe-026",
+  "classe": "golpe",
+  "categoria": "entrega",
+  "texto": "Receita Federal: sua encomenda internacional foi taxada (R$ 56,33). Regularize em até 48h ou ela será devolvida: receita-encomendas.online"
+ },
+ {
+  "id": "golpe-027",
+  "classe": "golpe",
+  "categoria": "entrega",
+  "texto": "Correios: última tentativa de entrega. Confirme seus dados e pague o frete de R$ 7,90 em correios.entrega-rapida.xyz"
+ },
+ {
+  "id": "golpe-028",
+  "classe": "golpe",
+  "categoria": "banco",
+  "texto": "Itaú: compra não reconhecida de R$ 2.389,00 no seu cartão. Se não foi você, ligue agora para a central de segurança: 0800 591 2047."
+ },
+ {
+  "id": "golpe-029",
+  "classe": "golpe",
+  "categoria": "banco",
+  "texto": "Bradesco: seu cartão será bloqueado. Atualize seus dados em https://bradesco-atualizacao.com"
+ },
+ {
+  "id": "golpe-030",
+  "classe": "golpe",
+  "categoria": "banco",
+  "texto": "Nubank: detectamos um acesso suspeito. Confirme sua senha em nubank-seguro.app/login"
+ },
+ {
+  "id": "golpe-031",
+  "classe": "golpe",
+  "categoria": "banco",
+  "texto": "Caixa Econômica: seu FGTS de R$ 1.890 está disponível para saque. Resgate seu valor em caixa-fgts-liberado.online"
+ },
+ {
+  "id": "golpe-032",
+  "classe": "golpe",
+  "categoria": "banco",
+  "texto": "Banco do Brasil: seu token expirou. Valide seu token pelo link para continuar usando o app: bit.ly/bb-token26"
+ },
+ {
+  "id": "golpe-033",
+  "classe": "golpe",
+  "categoria": "banco",
+  "texto": "Santander informa: pendência no seu cadastro. Evite o bloqueio da conta acessando http://177.54.12.9/santander"
+ },
+ {
+  "id": "golpe-034",
+  "classe": "golpe",
+  "categoria": "banco",
+  "texto": "Olá, aqui é do setor de segurança do seu banco. Identificamos uma transação suspeita de R$ 4.500. Para cancelar, vou precisar que você faça um Pix de teste para a conta segura que vou te passar."
+ },
+ {
+  "id": "golpe-035",
+  "classe": "golpe",
+  "categoria": "banco",
+  "texto": "Mercado Pago: seu saldo foi retido. Para liberar, pague a taxa de verificação pelo boleto:\n03391.23457 67890.123457 67890.123457 5 16360000006790"
+ },
+ {
+  "id": "golpe-036",
+  "classe": "golpe",
+  "categoria": "banco",
+  "texto": "Prezado cliente, seu Internet Banking será desativado hoje. Reative em www.reativa-cadastro.com.br"
+ },
+ {
+  "id": "golpe-037",
+  "classe": "golpe",
+  "categoria": "banco",
+  "texto": "PicPay: você recebeu R$ 500,00 de cashback! Resgate seu saldo em https://picpay.premios-br.shop"
+ },
+ {
+  "id": "golpe-038",
+  "classe": "golpe",
+  "categoria": "pedido_de_codigo",
+  "texto": "Olá! Aqui é da equipe do WhatsApp. Para manter sua conta ativa, me passa o código de 6 dígitos que enviamos por SMS."
+ },
+ {
+  "id": "golpe-039",
+  "classe": "golpe",
+  "categoria": "pedido_de_codigo",
+  "texto": "Oi, mandei um código pro seu número sem querer, pode me enviar? É do meu cadastro na OLX."
+ },
+ {
+  "id": "golpe-040",
+  "classe": "golpe",
+  "categoria": "pedido_de_codigo",
+  "texto": "Sou da pesquisa do Mercado Livre, você ganhou um cupom de R$ 200. Para ativar, informe o código que vai chegar no seu celular."
+ },
+ {
+  "id": "golpe-041",
+  "classe": "golpe",
+  "categoria": "pedido_de_codigo",
+  "texto": "Seu código de acesso do iFood chegou? Repasse ele aqui pra gente confirmar seu cadastro na promoção."
+ },
+ {
+  "id": "golpe-042",
+  "classe": "golpe",
+  "categoria": "pedido_de_codigo",
+  "texto": "Oi, sou a Carla, mãe do Enzo da escola. Vamos criar um grupo novo da turma, vai chegar um código no seu WhatsApp, me manda ele pra eu te adicionar."
+ },
+ {
+  "id": "golpe-043",
+  "classe": "golpe",
+  "categoria": "pedido_de_codigo",
+  "texto": "Banco Inter: para concluir o desbloqueio, digite aqui o token que enviamos por SMS."
+ },
+ {
+  "id": "golpe-044",
+  "classe": "golpe",
+  "categoria": "premio",
+  "texto": "Parabéns! Você foi sorteado na promoção Magalu 2026 e ganhou uma TV de 55 polegadas. Pague só o frete de R$ 29,90 no Pix:\n00020126330014br.gov.bcb.pix011129384756102520400005303986540529.905802BR5915FABIANA C NUNES6014BELO HORIZONTE62070503***63047757"
+ },
+ {
+  "id": "golpe-045",
+  "classe": "golpe",
+  "categoria": "premio",
+  "texto": "Você ganhou 1.500 pontos Livelo que expiram hoje! Troque agora em livelo-pontos.club"
+ },
+ {
+  "id": "golpe-046",
+  "classe": "golpe",
+  "categoria": "premio",
+  "texto": "Resgate seu prêmio de R$ 5.000 da Tele Sena. Acesse telesena-premio.com e informe seus dados bancários."
+ },
+ {
+  "id": "golpe-047",
+  "classe": "golpe",
+  "categoria": "premio",
+  "texto": "Sua chave Pix foi sorteada no programa Nota Fiscal Paulista. Para receber R$ 1.200, pague a taxa de R$ 45,00 pelo código:\n00020126330014br.gov.bcb.pix011181726354901520400005303986540545.005802BR5914WAGNER D ROCHA6006SANTOS62070503***630426FB"
+ },
+ {
+  "id": "golpe-048",
+  "classe": "golpe",
+  "categoria": "premio",
+  "texto": "Valores a receber: o Banco Central identificou R$ 870,50 esquecidos no seu CPF. Saque em valores-receber-bc.com"
+ },
+ {
+  "id": "golpe-049",
+  "classe": "golpe",
+  "categoria": "premio",
+  "texto": "Shopee 10 anos: você ganhou um vale-compras de R$ 300! Resgate em https://shopee-presentes.live"
+ },
+ {
+  "id": "golpe-050",
+  "classe": "golpe",
+  "categoria": "emprego",
+  "texto": "Olá! Sou recrutadora da Amazon. Temos vaga home office: você ganha de R$ 200 a R$ 800 por dia curtindo vídeos. Tem interesse?"
+ },
+ {
+  "id": "golpe-051",
+  "classe": "golpe",
+  "categoria": "emprego",
+  "texto": "Vaga de digitador em casa, R$ 3.500 por mês. Para garantir a vaga, pague o kit de cadastro de R$ 89,90:\n00020126330014br.gov.bcb.pix011190817263544520400005303986540589.905802BR5915LEANDRO P SILVA6006RECIFE62070503***63046AC1"
+ },
+ {
+  "id": "golpe-052",
+  "classe": "golpe",
+  "categoria": "emprego",
+  "texto": "Oi! Vi seu currículo. Trabalho simples avaliando hotéis pelo celular, comissão na hora. Me chama no Telegram: t.me/vagas_avaliacao"
+ },
+ {
+  "id": "golpe-053",
+  "classe": "golpe",
+  "categoria": "emprego",
+  "texto": "Tarefa 3 concluída! Para liberar suas comissões de R$ 1.240, faça um depósito de R$ 300 na conta da plataforma."
+ },
+ {
+  "id": "golpe-054",
+  "classe": "golpe",
+  "categoria": "emprego",
+  "texto": "Programa Jovem Aprendiz 2026: inscrições até hoje. Taxa de inscrição de R$ 35,00 via Pix:\n00020126330014br.gov.bcb.pix011172635418900520400005303986540535.005802BR5916MAICON R ALMEIDA6008SALVADOR62070503***63044430"
+ },
+ {
+  "id": "golpe-055",
+  "classe": "golpe",
+  "categoria": "governo",
+  "texto": "Receita Federal: seu CPF será suspenso por pendência na declaração. Regularize em gov-regulariza.online"
+ },
+ {
+  "id": "golpe-056",
+  "classe": "golpe",
+  "categoria": "governo",
+  "texto": "DETRAN: multa de trânsito com 40% de desconto até hoje. Pague pelo Pix:\n00020126330014br.gov.bcb.pix0111182736455905204000053039865406195.235802BR5914JOSE C PEREIRA6008BRASILIA62070503***63040FF5"
+ },
+ {
+  "id": "golpe-057",
+  "classe": "golpe",
+  "categoria": "governo",
+  "texto": "INSS: seu benefício será bloqueado se não fizer a prova de vida. Atualize em https://inss-provadevida.site"
+ },
+ {
+  "id": "golpe-058",
+  "classe": "golpe",
+  "categoria": "governo",
+  "texto": "Gov.br: você tem uma restituição de R$ 2.140,00. Para receber, confirme seus dados bancários em restituicao-gov.com"
+ },
+ {
+  "id": "golpe-059",
+  "classe": "golpe",
+  "categoria": "governo",
+  "texto": "Detran: licenciamento atrasado. Pague o boleto para evitar a apreensão do veículo:\n00191.23454 67890.123457 67890.123457 8 16360000016245"
+ },
+ {
+  "id": "golpe-060",
+  "classe": "golpe",
+  "categoria": "governo",
+  "texto": "Receita Federal: DARF em atraso. Pague ainda hoje via Pix para evitar multa:\n00020126360014br.gov.bcb.pix0114456789010001225204000053039865406318.405802BR5927RF ARRECADACAO DIGITAL LTDA6008BRASILIA62070503***6304C1B2"
+ },
+ {
+  "id": "golpe-061",
+  "classe": "golpe",
+  "categoria": "governo",
+  "texto": "Seu título de eleitor será cancelado. Regularize em tse-regulariza.xyz"
+ },
+ {
+  "id": "golpe-062",
+  "classe": "golpe",
+  "categoria": "pix_adulterado",
+  "texto": "Bella Moda: obrigada pela compra! Segue o Pix para finalizar o pedido:\n00020126360014br.gov.bcb.pix0114+5521988887777520400005303986540589.905802BR5915LOJA BELLA MODA6014RIO DE JANEIRO62070503***6304643A"
+ },
+ {
+  "id": "golpe-063",
+  "classe": "golpe",
+  "categoria": "pix_adulterado",
+  "texto": "Segue o Pix do sinal da reforma, como combinado:\n00020126330014br.gov.bcb.pix01114123456789052040000530398654071500.005802BR5915CONSTRUTORA SOL6008CAMPINAS62070503***63048425"
+ },
+ {
+  "id": "golpe-064",
+  "classe": "golpe",
+  "categoria": "pix_adulterado",
+  "texto": "Imobiliária Central: segue o Pix do aluguel de novembro.\n00020126460014br.gov.bcb.pix0124imobiliaria.pg@gmail.com52040000530398654071350.005802BR5917IMOBILIARIA CENTR6008LONDRINA62070503***6304D680"
+ },
+ {
+  "id": "golpe-065",
+  "classe": "golpe",
+  "categoria": "pix_adulterado",
+  "texto": "Campanha do Hospital da Criança: doe qualquer valor pelo Pix abaixo e ajude a reformar a ala infantil.\n00020126330014br.gov.bcb.pix0111519881233445204000053039865802BR5916HOSPITAL CRIANCA6012PORTO ALEGRE62070503***63046278"
+ },
+ {
+  "id": "golpe-066",
+  "classe": "golpe",
+  "categoria": "loja_falsa",
+  "texto": "Liquidação Magazine Luiza: iPhone 15 por R$ 1.999 só hoje! Compre em magaluofertas.shop"
+ },
+ {
+  "id": "golpe-067",
+  "classe": "golpe",
+  "categoria": "loja_falsa",
+  "texto": "Olá, vi seu anúncio na OLX. Já fiz o pagamento, só falta você confirmar no link: olx-pagamento-seguro.com"
+ },
+ {
+  "id": "golpe-068",
+  "classe": "golpe",
+  "categoria": "loja_falsa",
+  "texto": "Oi! Sou do Mercado Livre. Sua venda foi aprovada, mas você precisa pagar a taxa de liberação de R$ 49,90 para receber:\n00020126330014br.gov.bcb.pix011162738495011520400005303986540549.905802BR5914THIAGO B SOUZA6009SAO PAULO62070503***630471E1"
+ },
+ {
+  "id": "golpe-069",
+  "classe": "golpe",
+  "categoria": "loja_falsa",
+  "texto": "Air fryer de R$ 600 por R$ 97 com frete grátis, últimas unidades! Pague no Pix e ganhe 10% de desconto:\n00020126500014br.gov.bcb.pix0128ofertas.mariaalves@gmail.com520400005303986540587.305802BR5913MARIA E ALVES6009JOINVILLE62070503***630406B0"
+ },
+ {
+  "id": "golpe-070",
+  "classe": "golpe",
+  "categoria": "loja_falsa",
+  "texto": "Aluguel de temporada em Porto Seguro, casa com piscina por R$ 250 a diária. Para reservar, mande 50% do valor adiantado no Pix:\n00020126330014br.gov.bcb.pix0111837465192005204000053039865406750.005802BR5918GILBERTO N SANTANA6012PORTO SEGURO62070503***6304ED5A"
+ },
+ {
+  "id": "golpe-071",
+  "classe": "golpe",
+  "categoria": "divida",
+  "texto": "Itaú: sua proposta de acordo foi aprovada com 80% de desconto. Pague o boleto abaixo ainda hoje para garantir a condição:\n23791.23454 67890.123457 67890.123457 7 16360000058940"
+ },
+ {
+  "id": "golpe-072",
+  "classe": "golpe",
+  "categoria": "divida",
+  "texto": "Serasa Limpa Nome: sua dívida de R$ 3.400 pode ser quitada por R$ 199,00. Oferta válida só hoje:\n00020126330014br.gov.bcb.pix0111273645190885204000053039865406199.005802BR5916RENATO A CARDOSO6009SAO PAULO62070503***630491C6"
+ },
+ {
+  "id": "golpe-073",
+  "classe": "golpe",
+  "categoria": "divida",
+  "texto": "Feirão Limpa Nome: seu nome será negativado amanhã. Pague o acordo em acordo-serasa.top"
+ },
+ {
+  "id": "golpe-074",
+  "classe": "golpe",
+  "categoria": "investimento",
+  "texto": "Invista R$ 500 hoje e receba R$ 5.000 em 24 horas. Plataforma garantida, vagas limitadas. Chama no zap!"
+ },
+ {
+  "id": "golpe-075",
+  "classe": "golpe",
+  "categoria": "investimento",
+  "texto": "Oi, sou gerente de investimentos. Nosso robô de criptomoedas rende 3% ao dia. Faça o primeiro depósito pelo Pix:\n00020126330014br.gov.bcb.pix01113647582091152040000530398654071000.005802BR5915ADRIANO F MATOS6013FLORIANOPOLIS62070503***6304AE0D"
+ },
+ {
+  "id": "legitima-001",
+  "classe": "legitima",
+  "categoria": "cobranca",
+  "texto": "Academia Forma Viva: olá! Sua mensalidade de novembro (R$ 129,90) vence dia 10. Se preferir, pague pelo Pix:\n00020126360014br.gov.bcb.pix0114112223330001815204000053039865406129.905802BR5924ACADEMIA FORMA VIVA LTDA6006RECIFE62140510MENS112026630487E6"
+ },
+ {
+  "id": "legitima-002",
+  "classe": "legitima",
+  "categoria": "cobranca",
+  "texto": "Escola Pequeno Saber: a mensalidade de novembro (R$ 890,00) vence dia 10. Pix da escola:\n00020126360014br.gov.bcb.pix0114223334440001725204000053039865406890.005802BR5925ESCOLA PEQUENO SABER LTDA6005NATAL62090505NOV266304E6FB"
+ },
+ {
+  "id": "legitima-003",
+  "classe": "legitima",
+  "categoria": "cobranca",
+  "texto": "Condomínio Residencial Ipê: a taxa de dezembro é R$ 520,00. Pix do condomínio:\n00020126360014br.gov.bcb.pix0114334445550001635204000053039865406520.005802BR5926CONDOMINIO RESIDENCIAL IPE6008SOROCABA62070503***63042995"
+ },
+ {
+  "id": "legitima-004",
+  "classe": "legitima",
+  "categoria": "cobranca",
+  "texto": "Clínica Sorriso: obrigado pela visita! O valor da consulta foi R$ 180,00. Pix:\n00020126360014br.gov.bcb.pix0114445556660001545204000053039865406180.005802BR5920CLINICA SORRISO LTDA6007VITORIA62070503***63046F6A"
+ },
+ {
+  "id": "legitima-005",
+  "classe": "legitima",
+  "categoria": "cobranca",
+  "texto": "Pet Shop Amigo Fiel: o banho e tosa do Thor ficou R$ 75,00. Pode pagar pelo Pix:\n00020126360014br.gov.bcb.pix011455666777000145520400005303986540575.005802BR5922PET SHOP AMIGO FIEL ME6006MACEIO62070503***6304E01B"
+ },
+ {
+  "id": "legitima-006",
+  "classe": "legitima",
+  "categoria": "cobranca",
+  "texto": "Oi, aqui é a Dona Célia das marmitas. A semana deu R$ 140,00. Meu Pix:\n00020126330014br.gov.bcb.pix0111192837465005204000053039865406140.005802BR5918CELIA M DOS SANTOS6012JUIZ DE FORA62070503***63044F15"
+ },
+ {
+  "id": "legitima-007",
+  "classe": "legitima",
+  "categoria": "cobranca",
+  "texto": "Oi, dona Ana, a faxina de hoje ficou R$ 200,00. Segue o Pix no meu nome:\n00020126330014br.gov.bcb.pix0111283746550195204000053039865406200.005802BR5913JOSEFA R LIMA6008TERESINA62070503***63046037"
+ },
+ {
+  "id": "legitima-008",
+  "classe": "legitima",
+  "categoria": "cobranca",
+  "texto": "Speak Up Idiomas: sua matrícula foi confirmada. Primeira parcela de R$ 249,00:\n00020126360014br.gov.bcb.pix0114667778880001365204000053039865406249.005802BR5921SPEAK UP IDIOMAS LTDA6006CUIABA62110507MAT202663047FD1"
+ },
+ {
+  "id": "legitima-009",
+  "classe": "legitima",
+  "categoria": "boleto",
+  "texto": "Enel: sua fatura de novembro, de R$ 187,40, vence em 15/11. Código de barras:\n836100000014 874000482024 611150000127 345678901231"
+ },
+ {
+  "id": "legitima-010",
+  "classe": "legitima",
+  "categoria": "boleto",
+  "texto": "Sabesp: sua conta de R$ 96,50 já está disponível. Linha digitável:\n826900000009 965000482020 611150000127 345678901231"
+ },
+ {
+  "id": "legitima-011",
+  "classe": "legitima",
+  "categoria": "boleto",
+  "texto": "Itaú: o boleto do seu cartão, de R$ 1.320,55, vence dia 20:\n34191.23454 67890.123457 67890.123457 3 16360000132055"
+ },
+ {
+  "id": "legitima-012",
+  "classe": "legitima",
+  "categoria": "boleto",
+  "texto": "Unimed: segue o boleto da mensalidade de dezembro (R$ 612,00):\n00191.23454 67890.123457 67890.123457 1 16360000061200"
+ },
+ {
+  "id": "legitima-013",
+  "classe": "legitima",
+  "categoria": "boleto",
+  "texto": "Faculdade Horizonte: boleto da rematrícula, vencimento 20/11, R$ 1.050,00:\n23791.23454 67890.123457 67890.123457 3 16360000105000"
+ },
+ {
+  "id": "legitima-014",
+  "classe": "legitima",
+  "categoria": "boleto",
+  "texto": "Cemig: segunda via da sua conta, R$ 143,22:\n836600000019 432200482029 611150000127 345678901231"
+ },
+ {
+  "id": "legitima-015",
+  "classe": "legitima",
+  "categoria": "codigo_pedido",
+  "texto": "Seu código de acesso é 482913. Ele vale por 5 minutos. Não compartilhe este código com ninguém."
+ },
+ {
+  "id": "legitima-016",
+  "classe": "legitima",
+  "categoria": "codigo_pedido",
+  "texto": "Nubank: 731594 é o seu código de verificação. Não compartilhe com ninguém."
+ },
+ {
+  "id": "legitima-017",
+  "classe": "legitima",
+  "categoria": "codigo_pedido",
+  "texto": "WhatsApp: o seu código é 284-617. Não compartilhe este código."
+ },
+ {
+  "id": "legitima-018",
+  "classe": "legitima",
+  "categoria": "codigo_pedido",
+  "texto": "iFood: use 5821 para entrar na sua conta."
+ },
+ {
+  "id": "legitima-019",
+  "classe": "legitima",
+  "categoria": "codigo_pedido",
+  "texto": "Mercado Livre: 093412 é o seu código de segurança. Se não foi você, ignore esta mensagem."
+ },
+ {
+  "id": "legitima-020",
+  "classe": "legitima",
+  "categoria": "codigo_pedido",
+  "texto": "Gov.br: seu código de validação é 663108. Válido por 10 minutos."
+ },
+ {
+  "id": "legitima-021",
+  "classe": "legitima",
+  "categoria": "codigo_pedido",
+  "texto": "Uber: o seu código é 4417. Nunca o compartilhe."
+ },
+ {
+  "id": "legitima-022",
+  "classe": "legitima",
+  "categoria": "codigo_pedido",
+  "texto": "Itaú: código 908172 para liberar seu novo celular. Não diga a ninguém, nem a funcionários do banco."
+ },
+ {
+  "id": "legitima-023",
+  "classe": "legitima",
+  "categoria": "entrega",
+  "texto": "Correios: seu objeto QB123456789BR saiu para entrega. Acompanhe em https://rastreamento.correios.com.br"
+ },
+ {
+  "id": "legitima-024",
+  "classe": "legitima",
+  "categoria": "entrega",
+  "texto": "Mercado Livre: seu pacote chega amanhã entre 8h e 18h. Detalhes em https://www.mercadolivre.com.br/minhas-compras"
+ },
+ {
+  "id": "legitima-025",
+  "classe": "legitima",
+  "categoria": "entrega",
+  "texto": "Amazon: seu pedido 402-1189 foi entregue. Avalie em https://www.amazon.com.br/your-orders"
+ },
+ {
+  "id": "legitima-026",
+  "classe": "legitima",
+  "categoria": "entrega",
+  "texto": "Shopee: pedido 2611ABCD enviado! Acompanhe pelo app da Shopee."
+ },
+ {
+  "id": "legitima-027",
+  "classe": "legitima",
+  "categoria": "entrega",
+  "texto": "Magalu: seu pedido foi aprovado e deve chegar até 14/11."
+ },
+ {
+  "id": "legitima-028",
+  "classe": "legitima",
+  "categoria": "entrega",
+  "texto": "Loggi: sua entrega da Natura chega hoje. Acompanhe: https://www.loggi.com/rastreador/NT8812"
+ },
+ {
+  "id": "legitima-029",
+  "classe": "legitima",
+  "categoria": "entrega",
+  "texto": "Total Express: seu pedido está em rota de entrega. Se possível, deixe alguém no endereço."
+ },
+ {
+  "id": "legitima-030",
+  "classe": "legitima",
+  "categoria": "entrega",
+  "texto": "iFood: seu pedido saiu para entrega! O entregador chega em cerca de 15 minutos."
+ },
+ {
+  "id": "legitima-031",
+  "classe": "legitima",
+  "categoria": "lembrete",
+  "texto": "Lembrete: sua consulta com a Dra. Paula (dermatologia) é amanhã às 14h. Responda 1 para confirmar ou 2 para desmarcar."
+ },
+ {
+  "id": "legitima-032",
+  "classe": "legitima",
+  "categoria": "lembrete",
+  "texto": "Laboratório Fleury: seus exames estão prontos. Veja em https://www.fleury.com.br/resultados"
+ },
+ {
+  "id": "legitima-033",
+  "classe": "legitima",
+  "categoria": "lembrete",
+  "texto": "Barbearia do Zé: horário confirmado para sábado às 10h. Até lá!"
+ },
+ {
+  "id": "legitima-034",
+  "classe": "legitima",
+  "categoria": "lembrete",
+  "texto": "Secretaria de Saúde: dose de reforço disponível na UBS do seu bairro, de segunda a sexta, das 8h às 17h."
+ },
+ {
+  "id": "legitima-035",
+  "classe": "legitima",
+  "categoria": "lembrete",
+  "texto": "Oi, aqui é do consultório da Dra. Lívia. Lembrando da sua limpeza dia 22/11 às 9h30."
+ },
+ {
+  "id": "legitima-036",
+  "classe": "legitima",
+  "categoria": "lembrete",
+  "texto": "Oficina Avenida: seu carro está pronto, pode buscar até as 18h."
+ },
+ {
+  "id": "legitima-037",
+  "classe": "legitima",
+  "categoria": "familia",
+  "texto": "Mãe, cheguei bem. Amanhã te ligo."
+ },
+ {
+  "id": "legitima-038",
+  "classe": "legitima",
+  "categoria": "familia",
+  "texto": "Vó, a festa do Pedro é domingo às 15h, lá em casa. Leva aquele bolo?"
+ },
+ {
+  "id": "legitima-039",
+  "classe": "legitima",
+  "categoria": "familia",
+  "texto": "Pai, me manda a foto daquele documento do carro, por favor."
+ },
+ {
+  "id": "legitima-040",
+  "classe": "legitima",
+  "categoria": "familia",
+  "texto": "Amor, compra pão quando voltar? E vê se ainda tem leite."
+ },
+ {
+  "id": "legitima-041",
+  "classe": "legitima",
+  "categoria": "familia",
+  "texto": "Filho, seu tio mandou um abraço. Liga pra ele quando puder."
+ },
+ {
+  "id": "legitima-042",
+  "classe": "legitima",
+  "categoria": "familia",
+  "texto": "Gente, o almoço de domingo vai ser na casa da tia Lu. Cada um leva um prato!"
+ },
+ {
+  "id": "legitima-043",
+  "classe": "legitima",
+  "categoria": "familia",
+  "texto": "Mãe, me liga urgente quando vir, é sobre a escola do Davi."
+ },
+ {
+  "id": "legitima-044",
+  "classe": "legitima",
+  "categoria": "familia",
+  "texto": "Pai, troquei de celular mas o número é o mesmo, tá? Só pra você não estranhar a foto nova."
+ },
+ {
+  "id": "legitima-045",
+  "classe": "legitima",
+  "categoria": "familia_pix",
+  "texto": "Mãe, me empresta R$ 50,00 pro lanche da excursão? Te pago quando receber a mesada kkk\n00020126330014br.gov.bcb.pix011147382910566520400005303986540550.005802BR5915BEATRIZ C SOUZA6009SAO PAULO62070503***6304DB04"
+ },
+ {
+  "id": "legitima-046",
+  "classe": "legitima",
+  "categoria": "familia_pix",
+  "texto": "Pai, a conta do dentista deu R$ 120,00. Pode mandar pro meu Pix? A chave é meu CPF."
+ },
+ {
+  "id": "legitima-047",
+  "classe": "legitima",
+  "categoria": "familia_pix",
+  "texto": "Mano, paguei a pizza e depois a gente divide. Deu R$ 96,00, manda R$ 48,00 no Pix."
+ },
+ {
+  "id": "legitima-048",
+  "classe": "legitima",
+  "categoria": "familia_pix",
+  "texto": "Tia, aqui é a Bia, mesmo número de sempre rs. Consegue me ajudar com R$ 100,00 pro material da faculdade? Meu Pix:\n00020126330014br.gov.bcb.pix0111564738291005204000053039865406100.005802BR5917BIANCA R TEIXEIRA6008SALVADOR62070503***63049A07"
+ },
+ {
+  "id": "legitima-049",
+  "classe": "legitima",
+  "categoria": "familia_pix",
+  "texto": "Filha, deposita o aluguel desse mês na minha conta, pode ser até sexta."
+ },
+ {
+  "id": "legitima-050",
+  "classe": "legitima",
+  "categoria": "banco",
+  "texto": "Itaú: compra aprovada de R$ 89,90 em SUPERMERCADO BOM PRECO no cartão final 4421."
+ },
+ {
+  "id": "legitima-051",
+  "classe": "legitima",
+  "categoria": "banco",
+  "texto": "Nubank: você recebeu um Pix de R$ 250,00 de JOAO P MARTINS."
+ },
+ {
+  "id": "legitima-052",
+  "classe": "legitima",
+  "categoria": "banco",
+  "texto": "Bradesco: sua fatura fecha amanhã. Valor parcial de R$ 1.204,33. Veja no app Bradesco."
+ },
+ {
+  "id": "legitima-053",
+  "classe": "legitima",
+  "categoria": "banco",
+  "texto": "Caixa: seu benefício foi creditado. Consulte o extrato no app Caixa Tem."
+ },
+ {
+  "id": "legitima-054",
+  "classe": "legitima",
+  "categoria": "banco",
+  "texto": "Santander: você fez uma transferência de R$ 300,00 às 14:32. Se não reconhece, ligue para o número do verso do seu cartão."
+ },
+ {
+  "id": "legitima-055",
+  "classe": "legitima",
+  "categoria": "banco",
+  "texto": "Banco do Brasil: seu cartão final 8810 foi desbloqueado com sucesso."
+ },
+ {
+  "id": "legitima-056",
+  "classe": "legitima",
+  "categoria": "promocao",
+  "texto": "Magalu: a Black Friday começou! Até 70% off em https://www.magazineluiza.com.br/black-friday"
+ },
+ {
+  "id": "legitima-057",
+  "classe": "legitima",
+  "categoria": "promocao",
+  "texto": "Netflix: novos episódios da sua série favorita já estão disponíveis."
+ },
+ {
+  "id": "legitima-058",
+  "classe": "legitima",
+  "categoria": "promocao",
+  "texto": "Renner: cupom de 15% válido até domingo na loja ou em https://www.lojasrenner.com.br"
+ },
+ {
+  "id": "legitima-059",
+  "classe": "legitima",
+  "categoria": "promocao",
+  "texto": "Amazon: último dia da oferta relâmpago, aproveite em https://www.amazon.com.br/deals"
+ },
+ {
+  "id": "legitima-060",
+  "classe": "legitima",
+  "categoria": "promocao",
+  "texto": "Mercado Livre: você ganhou frete grátis na próxima compra! Use até 30/11 no app."
+ },
+ {
+  "id": "legitima-061",
+  "classe": "legitima",
+  "categoria": "comunicado",
+  "texto": "Condomínio: a água será interrompida amanhã das 9h às 12h para manutenção."
+ },
+ {
+  "id": "legitima-062",
+  "classe": "legitima",
+  "categoria": "comunicado",
+  "texto": "Escola Municipal Monteiro Lobato: reunião de pais quinta às 19h. Contamos com sua presença!"
+ },
+ {
+  "id": "legitima-063",
+  "classe": "legitima",
+  "categoria": "comunicado",
+  "texto": "RH: o holerite de outubro já está disponível no portal do funcionário."
+ },
+ {
+  "id": "legitima-064",
+  "classe": "legitima",
+  "categoria": "comunicado",
+  "texto": "Equipe, a reunião de amanhã passou para as 10h. O link da sala está no calendário."
+ },
+ {
+  "id": "legitima-065",
+  "classe": "legitima",
+  "categoria": "comunicado",
+  "texto": "Síndico: lembrando que a assembleia é dia 20. A pauta está no mural do prédio."
+ },
+ {
+  "id": "legitima-066",
+  "classe": "legitima",
+  "categoria": "comunicado",
+  "texto": "Prefeitura: campanha de vacinação antirrábica neste sábado, na praça central."
+ },
+ {
+  "id": "legitima-067",
+  "classe": "legitima",
+  "categoria": "amigos",
+  "texto": "Valeu pelo bolo! Te mandei os R$ 60,00 no Pix agora há pouco."
+ },
+ {
+  "id": "legitima-068",
+  "classe": "legitima",
+  "categoria": "amigos",
+  "texto": "Oi, sobre o sofá do anúncio: fechado por R$ 450,00. Te mando o Pix assim que ele for entregue."
+ },
+ {
+  "id": "legitima-069",
+  "classe": "legitima",
+  "categoria": "amigos",
+  "texto": "Pessoal do futebol, a quadra deu R$ 15 pra cada. Pix do Diego:\n00020126330014br.gov.bcb.pix0111657483920115204000053039865802BR5913DIEGO F RAMOS6010UBERLANDIA62070503***63042E6C"
+ },
+ {
+  "id": "legitima-070",
+  "classe": "legitima",
+  "categoria": "amigos",
+  "texto": "Rifa da formatura da Laura: o número 37 é seu! Valor de R$ 10,00. Pix:\n00020126330014br.gov.bcb.pix011174859302155520400005303986540510.005802BR5914LAURA M CAMPOS6007MARINGA62070503***6304F674"
+ },
+ {
+  "id": "legitima-071",
+  "classe": "legitima",
+  "categoria": "amigos",
+  "texto": "Amiga, a sua parte do presente da professora ficou R$ 25,00. Meu Pix:\n00020126460014br.gov.bcb.pix0124ana.ribeiro.lr@gmail.com520400005303986540525.005802BR5913ANA L RIBEIRO6007ARACAJU62070503***6304F603"
+ },
+ {
+  "id": "legitima-072",
+  "classe": "legitima",
+  "categoria": "aviso_oficial",
+  "texto": "Enel: devido a uma manutenção programada, o fornecimento será suspenso no dia 14/11, das 8h às 12h, na sua rua."
+ },
+ {
+  "id": "legitima-073",
+  "classe": "legitima",
+  "categoria": "aviso_oficial",
+  "texto": "Itaú: sua senha foi alterada. Se não foi você, ligue para o número do verso do cartão."
+ },
+ {
+  "id": "legitima-074",
+  "classe": "legitima",
+  "categoria": "aviso_oficial",
+  "texto": "Detran-SP: seu licenciamento 2026 vence em dezembro. Pague pelo app do seu banco ou em https://www.detran.sp.gov.br"
+ },
+ {
+  "id": "legitima-075",
+  "classe": "legitima",
+  "categoria": "aviso_oficial",
+  "texto": "Correios: sua encomenda internacional aguarda o pagamento do imposto de importação. Pague somente pelo app dos Correios ou em https://www.correios.com.br/minhas-importacoes"
+ }
+]
