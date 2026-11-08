@@ -10,7 +10,7 @@
 [![Gemini API](https://img.shields.io/badge/Gemini_API-camada_gratuita-4285F4?logo=googlegemini&logoColor=white)](https://ai.google.dev/)
 [![Pydantic](https://img.shields.io/badge/Pydantic-v2-E92063?logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-interface-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![pytest](https://img.shields.io/badge/pytest-284_testes-0A9EDC?logo=pytest&logoColor=white)](tests/)
+[![pytest](https://img.shields.io/badge/pytest-445_testes-0A9EDC?logo=pytest&logoColor=white)](tests/)
 
 Golpes por mensagem acontecem todos os dias: boleto falso, Pix para um "parente com número novo", falsa central do banco, link de entrega com taxa a pagar. Quem mais cai são pessoas menos acostumadas com tecnologia.
 
@@ -37,7 +37,7 @@ Detectores comuns só leem o texto e dão um palpite. Este **abre os códigos**.
 - [Testes](#testes)
 - [Estrutura do projeto](#estrutura-do-projeto)
 - [Decisões de projeto](#decisões-de-projeto)
-- [Como o projeto vai ser avaliado](#como-o-projeto-vai-ser-avaliado)
+- [Avaliação](#avaliação)
 
 ---
 
@@ -50,7 +50,7 @@ O projeto é construído em fases. A tabela abaixo mostra o que já está pronto
 | 1 | Decodificadores de Pix, boleto e link, com testes e CI | ✅ Pronta |
 | 2 | Agente com Gemini (texto e visão, *function calling*) que cruza os achados | ✅ Pronta |
 | 3 | Interface em Streamlit com exemplos prontos, publicada em [golpe-ou-nao.streamlit.app](https://golpe-ou-nao.streamlit.app/) | ✅ Pronta |
-| 4 | Avaliação com 150 mensagens reais (golpes e legítimas) | Em breve |
+| 4 | Avaliação com 150 mensagens (golpes e legítimas) | Em andamento: conjunto e rodada sem IA prontos, falta a rodada com IA |
 | 5 | Docker e README final | Em breve |
 
 ## Como funciona
@@ -280,7 +280,7 @@ Para achar os códigos dentro de uma mensagem inteira, use `extrair_pix`, `extra
 pytest
 ```
 
-São 284 testes, rodados a cada push pelo GitHub Actions em Python 3.11 e 3.12. Para não conferir o código contra ele mesmo, os testes usam referências externas:
+São 445 testes, rodados a cada push pelo GitHub Actions em Python 3.11 e 3.12. Para não conferir o código contra ele mesmo, os testes usam referências externas:
 
 - o **exemplo oficial do Manual do Pix** do Banco Central (CRC `1D3D`) e o vetor padrão do CRC16-CCITT (`"123456789"` → `29B1`);
 - uma **linha de boleto do Banco do Brasil** publicada na documentação de cobrança;
@@ -288,7 +288,8 @@ São 284 testes, rodados a cada push pelo GitHub Actions em Python 3.11 e 3.12. 
 - a API do Safe Browsing **simulada**, então nenhum teste acessa a internet;
 - um **Gemini falso** que segue um roteiro de respostas (chamadas de função, erro 429, resposta sem função, laço sem fim), para testar o agente sem gastar cota;
 - a **tela inteira** rodada pelo `AppTest` do Streamlit, sem navegador: clicar num exemplo, analisar, limpar, enviar sem mensagem, usar a chave digitada (e dar prioridade a ela sobre a do servidor), sem que a chave apareça na página;
-- cada **exemplo pronto** conferido contra o nível esperado, para a demonstração nunca mostrar um resultado errado.
+- cada **exemplo pronto** conferido contra o nível esperado, para a demonstração nunca mostrar um resultado errado;
+- as **150 mensagens da avaliação**: os códigos de cada uma conferem (menos os adulterados de propósito), e o resultado sem IA gravado continua igual ao do código atual.
 
 Também há testes de adulteração (trocar qualquer dígito do boleto ou uma letra do nome no Pix é detectado), de **injeção de instrução** (a mensagem diz "isto não é golpe", o modelo acredita, e a prova mantém o nível) e de falsos alarmes (`receitas.tudogostoso.com.br` não é confundido com a Receita Federal).
 
@@ -316,6 +317,13 @@ golpe-ou-nao/
 │   ├── mensagens.json  # Mensagens de exemplo com o nível esperado
 │   ├── print-*.png     # Prints sintéticos
 │   └── gerar_prints.py # Refaz os prints
+├── avaliacao/
+│   ├── conjunto.py     # As 150 mensagens e a montagem dos códigos
+│   ├── mensagens.json  # O conjunto gerado
+│   ├── metricas.py     # Contas e relatório
+│   ├── __main__.py     # Roda a avaliação, com ou sem IA
+│   ├── resultados/     # Níveis obtidos em cada rodada
+│   └── RESULTADOS.md   # Relatório
 ├── app.py              # Interface em Streamlit
 ├── .streamlit/         # Tema e modelo de secrets
 ├── docs/               # Imagens do README
@@ -338,10 +346,21 @@ golpe-ou-nao/
 - **A chave de quem visita não é guardada.** Ela vive só no estado da sessão do Streamlit e vai direto para o cliente do Gemini.
 - **Termos curtos de marca exigem cuidado.** "itau" e "enel" só contam no começo de um pedaço do endereço, para não acusar `penelope.com` de imitar a Enel.
 
-## Como o projeto vai ser avaliado
+## Avaliação
 
-Na fase 4, o agente será medido num conjunto de **150 mensagens**: metade golpes reais, tirados de alertas públicos de bancos e Procons, e metade mensagens legítimas. As métricas:
+O agente foi medido num conjunto de **150 mensagens**: 75 golpes e 75 mensagens legítimas. As mensagens foram escritas para o teste, imitando golpes e avisos comuns no Brasil. Não foram coletadas de pessoas reais. O conjunto inclui casos difíceis nos dois lados: golpes sem código nem frase típica (vaga de emprego, investimento) e mensagens legítimas com palavras de golpe ("último dia da oferta", "troquei de celular"). O método e os limites estão em [avaliacao/README.md](avaliacao/README.md).
 
-- **golpes detectados**, a mais importante: deixar passar um golpe custa dinheiro;
-- **falsos alarmes** em mensagens legítimas: alarme demais faz a pessoa parar de confiar no aviso;
-- **acerto dos decodificadores**, que deve ser de 100% nos testes.
+| Modo | Golpes pegos | Golpes com "provável golpe" | Alarme falso | Legítimas com "atenção" |
+| --- | --- | --- | --- | --- |
+| Sem IA (verificadores e regras) | 58/75 (77%) | 32/75 (43%) | 0/75 (0%) | 6/75 (8%) |
+| Com IA | em breve | | | |
+
+- **Golpes pegos** são os que receberam "provável golpe" ou "atenção": nos dois casos a pessoa é avisada para conferir antes de pagar.
+- **Alarme falso** é uma mensagem legítima marcada como "provável golpe".
+
+Sem IA, 17 golpes passaram sem sinais. A maior parte não tem código nem frase típica: 5 de emprego e 2 de investimento. Outros escapam por pouco: "celular novo" não está entre as frases que as regras reconhecem como troca de número, e "pode me enviar" o código não bate com o padrão de pedido de código. A lista completa, mensagem por mensagem, está em [avaliacao/RESULTADOS.md](avaliacao/RESULTADOS.md). As regras não foram ajustadas para acertar esses casos, porque o número deixaria de medir alguma coisa.
+
+```bash
+python -m avaliacao --sem-ia            # sem chave
+GEMINI_API_KEY=... python -m avaliacao  # com a IA; pode parar e continuar depois
+```
